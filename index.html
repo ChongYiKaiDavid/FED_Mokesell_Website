@@ -3,95 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MokeSell</title>
+    <title>mokeSell Website</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
 </head>
 <body>
-    <header>
-        <div class="navbar">
-            <h1 class="logo">MokeSell</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Cart</a></li>
-                </ul>
-            </nav>
+    <header class="header">
+        <div class="logo">
+            <h1>MokeSell</h1>
         </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a id="type-link" href="#">Products</a></li>
+                <li><a id="blog-link" href="#">Blog</a></li>
+                <li><a id="contact-link" href="#contact-section">Contact</a></li>
+
+            </ul>
+        </nav>
     </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Best Deals!!!</h2>
-                <button class="shop-now">Shop Now</button>
+    <section class="banner">
+        <div class="banner-content">
+        </div>
+    </section>
+    <!--About-->
+    <section id="about-section" class="about-section">
+        <div class="about-container">
+            <h2>About Us</h2>
+            <p>
+                Welcome to MokeSell, the ultimate marketplace where buyers and sellers connect effortlessly. 
+                Our platform offers a seamless shopping experience, allowing buyers to explore a wide range of quality 
+                products while giving sellers the tools to grow their businesses. With secure transactions, easy navigation, 
+                and a community-driven approach, we make online buying and selling simple, safe, and rewarding. Join us today 
+                and be part of a thriving marketplace!
+            </p>
+            <p>
+                Our mission is to empower individuals and businesses by providing a seamless, secure, and dynamic platform for 
+                online buying and selling. We are dedicated to fostering a community where buyers and sellers can connect, thrive, and grow together.
+            </p>
+            <div class="about-highlights">
+                <div class="highlight">
+                    <i class="fas fa-basketball-ball"></i>
+                    <p>Premium Quality Products</p>
+                </div>
+                <div class="highlight">
+                    <i class="fas fa-truck"></i>
+                    <p>Fast & Reliable Delivery</p>
+                </div>
+                <div class="highlight">
+                    <i class="fas fa-thumbs-up"></i>
+                    <p>100% Customer Satisfaction</p>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Categories Section -->
-        <section class="categories">
-            <div class="category-item">Facial Care</div>
-            <div class="category-item">Perfumes</div>
-            <div class="category-item">Clothing</div>
-        </section>
-
-        <!-- Testimonial Section -->
-        <section class="testimonial">
-            <p>"I've tried countless moisturizers, but this one is a game-changer! My skin feels softer, smoother, and stays hydrated all day without feeling greasy. It's the perfect balance!"</p>
-            <span>- Erika M.</span>
-        </section>
-
-        <!-- Best Selling Products Section -->
-        <section class="best-sellers">
-            <h3>Best Selling Products</h3>
-            <div class="products">
-                <div class="product-item">Clear Essence Foaming Cleanser</div>
-                <div class="product-item">DYSON FAN</div>
-                <div class="product-item">AgeDefy Retinol Serum</div>
-                <div class="product-item">Sauvage Eau de Parfum</div>
+    <section class="categories">
+        <div class="category">
+            <img src="https://i.etsystatic.com/13826775/r/il/504425/5380229319/il_fullxfull.5380229319_co44.jpg" alt="Facial Care">
+            <div class="overlay">
+                <p>Facial Care</p>
             </div>
-        </section>
-
-        <!-- Latest Articles Section -->
-        <section class="articles">
-            <h3>Latest Articles</h3>
-            <div class="articles-list">
-                <div class="article">Best Practices for Using Vitamin C in Your Routine</div>
-                <div class="article">How to Build a Skincare Routine</div>
-                <div class="article">Championing Queer Scientists</div>
+        </div>
+        <div class="category">
+            <img src="https://www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.1,f_auto/w_280/prd-emea/sys-master/content/P1/h5b/h36/10674361270302-MEGA-MENU_MOBILE_560x314_TRIO_N5-BLEU-CCM(1).jpg%20280w,//www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.1,f_auto/w_350/prd-emea/sys-master/content/P1/h5b/h36/10674361270302-MEGA-MENU_MOBILE_560x314_TRIO_N5-BLEU-CCM(1).jpg%20350w,//www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.1,f_auto/w_560/prd-emea/sys-master/content/P1/h5b/h36/10674361270302-MEGA-MENU_MOBILE_560x314_TRIO_N5-BLEU-CCM(1).jpg%20560w" alt="Perfumes">
+            <div class="overlay">
+                <p>Perfumes</p>
             </div>
-        </section>
-
-        <!-- Feedback Form -->
-        <section class="feedback">
-            <h3>What prevented you from completing your purchase today?</h3>
-            <button>Price was too high</button>
-            <button>Cost of shipping was too expensive</button>
-            <button>There was lack of payment options</button>
-            <button>I'm just researching right now</button>
-            <button>Other</button>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 MokeSell. All rights reserved.</p>
-            <div class="links">
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-                <a href="#">Privacy</a>
+        </div>
+        <div class="category">
+            <img src="https://img.freepik.com/premium-photo/women-s-fashion-store-shopping-center_1112-9614.jpg?w=360" alt="Clothing">
+            <div class="overlay">
+                <p>Clothing</p>
             </div>
-            <form class="newsletter">
-                <label for="email">Our Newsletter</label>
-                <input type="email" id="email" placeholder="Your email address">
-                <button type="submit">Send</button>
-            </form>
+        </div>
+    </section>
+    <!-- Reviews -->
+    <div class="testimonial-section">
+        <button class="nav-btn" id="prevBtn">&#8592;</button>
+        
+        <div class="testimonial-container">
+            <div class="testimonial-text" id="testimonial">
+                “I've tried countless moisturizers, but this one is a game-changer! 
+                My skin feels softer, smoother, and stays hydrated all day without feeling greasy. 
+                It's the perfect balance!”
+            </div>
+    
+            <div class="profile">
+                <img id="profileImg" src="https://randomuser.me/api/portraits/women/45.jpg" alt="User">
+                <div class="name" id="name">Emilia Murray</div>
+            </div>
+    
+            <div class="dots">
+                <span class="dot active" onclick="showTestimonial(0)"></span>
+                <span class="dot" onclick="showTestimonial(1)"></span>
+                <span class="dot" onclick="showTestimonial(2)"></span>
+            </div>
+        </div>
+    
+        <button class="nav-btn" id="nextBtn">&#8594;</button>
+        
+    </div>
+    
+    <script src="script.js"></script>
+    
+    <!-- Best selling products -->
+    <section class="best-selling">
+        <h2>Best Selling Products</h2>
+        <div class="carousel-container">
+            <button id="prevBtn" class="nav-btn">&#10094;</button>
+            <div class="carousel">
+                <div class="product">
+                    <img src="https://m.media-amazon.com/images/I/81mvnWDpH8L._AC_UF350,350_QL80_.jpg" alt="Foaming Cleanser">
+                    <h3>Foaming Cleanser</h3>
+                    <p class="price">$50.00</p>
+                    <p class="rating">★★★★★</p>
+                </div>
+                <div class="product">
+                    <img src="https://www.techadvisor.com/wp-content/uploads/2022/06/dyson_pure_hot_cool_fan_review.jpg?quality=50&strip=all" alt="DYSON FAN">
+                    <h3>DYSON FAN</h3>
+                    <p class="price">$450.00</p>
+                    <p class="rating">★★★★☆</p>
+                </div>
+                <div class="product">
+                    <img src="https://down-sg.img.susercontent.com/file/sg-11134207-7rdx3-m1c8b23sopv5da" alt="AgeDefy Retinol Serum">
+                    <h3>Retinol Serum</h3>
+                    <p class="price">$1250.00</p>
+                    <p class="rating">★★★★★</p>
+                </div>
+                <div class="product">
+                    <img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwd0184ffe/Y0785220/Y0785220_F078524009_E01_ZHC.jpg?sw=1800&sh=1200" alt="Sauvage Eau de Parfum">
+                    <h3>Sauvage Parfum</h3>
+                    <p class="price">$216.00</p>
+                    <p class="rating">★★★★☆</p>
+                </div>
+            </div>
+            <button id="nextBtn" class="nav-btn">&#10095;</button>
+        </div>
+    </section>
+    <!-- CCONTACT INFO -->
+    
+
+
+    </section>
+    <section id="contact-section" class="contact-section">
+        <div class="contact-background">
+            <div class="contact-content">
+                <h2>CONTACT INFO</h2>
+                <p>Call us (99) 124 1242 12</p>
+                <button class="contact-button">CONTACT US</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- BLOGS -->
+    <section id="news-section" class="news-section">
+        <h1>Latest Articles</h1>
+        <div class="news-grid">
+            <div class="news-item">
+                <img src="https://femina.wwmindia.com/content/2023/may/vitamin-thumb1683545322.jpg" alt="Best Practices for Using Vitamin C in Your Routine">
+                <div class="news-content">
+                    <p class="date">SEPT 22, 2024</p>
+                    <a href="https://www.femina.in/beauty/skin/vitamin-c-for-skin-265273.html" class="title">Best Practices for Using Vitamin C in Your Routine</a>
+                    <p class="description">Get glowing skin with the power of Vitamin C. Discover its benefits and how to incorporate it into your skincare routine</p>
+                </div>
+            </div>
+            <div class="news-item">
+                <img src="file:///C:/Users/chase/Downloads/ndrc3e2ge1yh4qdjw6ba.webp" alt="Giannis">
+                <div class="news-content">
+                    <p class="date">November 17, 2024</p>
+                    <a href="https://bleacherreport.com/articles/10143686-nba-ref-admits-mistake-on-giannis-foul-call-after-lamelo-ball-hornets-beat-bucks " class="title">REF ADMITS MISTAKE ON GIANNIS CALL</a>
+                    <p class="description">Pool report states Bucks star didn’t make ‘illegal contact’ which led to Lamelo’s game-winning FTs</p>
+                </div>
+            </div>
+            <div class="news-item">
+                <img src="https://media.licdn.com/dms/image/sync/v2/D4E27AQGCVuzZ4pwWew/articleshare-shrink_800/articleshare-shrink_800/0/1737023702963?e=2147483647&v=beta&t=BdUGOis_PXO0-aMxZTjl6TE8o8NtJdURYzdmNrpb4ak" alt="Championing queer scientists">
+                <div class="news-content">
+                    <p class="date">November 17, 2024</p>
+                    <a href="https://www.nature.com/articles/d41586-024-04069-8#:~:text=16%20January%202025-,Championing%20queer%20scientists%20of%20colour%3A%20'I%20don't%20think,affecting%20queer%20people%20of%20colour." class="title">Championing queer scientists of colour</a>
+                    <p class="description">Arachnologist Lauren Esposito develops community platforms to share LGBTQ+ voices and wants to shed light on the overlooked intersectional barriers affecting queer people of colour</p>
+                </div>
+            </div>
+        </div>
+        <a href="https://www.msn.com/en-ph/news/other/gma-network-airs-the-ncaa-season-100-men-s-basketball-finals/ar-AA1uXAYR" class="read-blogs-button">READ BLOGS</a>
+    </section>
+    <script src="script.js"></script>
+</body>
+
+    <section class="features-section">
+        <div class="features-container">
+            <div class="feature-item">
+                <img src="file:///C:/Users/chase/Downloads/car-icon-transport-icons-vehicle-or-automobile-symbol-png.webp" alt="Return Policy Icon">
+                <p>BEST RETURN POLICIES</p>
+            </div>
+            <div class="feature-item">
+                <img src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3204397/bookmarks-icon-md.png" alt="Easy Buying Icon">
+                <p>EASY BUYING</p>
+            </div>
+            <div class="feature-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1zmRbvA2RS45e3bbqKY7a0yxWkUufnw1qU12cy9EyNAEObr0&s" alt="Best Rate Icon">
+                <p>100% BEST RATE</p>
+            </div>
+            <div class="feature-item">
+                <img src="https://clipart-library.com/images_k/speech-bubbles-transparent/speech-bubbles-transparent-18.png" alt="Customer Support Icon">
+                <p>CUSTOMER SUPPORT</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <h2>MokeSell</h2>
+                <p>Making ecommerce simple and easy</p>
+                <div class="social-icons">
+                    <a href="https://r.search.yahoo.com/_ylt=Awr1VS6U_kpnDwIAtToj4gt.;_ylu=Y29sbwNzZzMEcG9zAzIEdnRpZAMEc2VjA3Ny/RV=2/RE=1734177684/RO=10/RU=https%3a%2f%2fwww.facebook.com%2fenjoybball%2f/RK=2/RS=tAmqfOynVixG_LncDrCMIyG0yIQ-"><i class="fab fa-facebook"></i></a>
+                    <a href="https://r.search.yahoo.com/_ylt=Awr1VS7P_kpnDwIArLcj4gt.;_ylu=Y29sbwNzZzMEcG9zAzEEdnRpZAMEc2VjA3Ny/RV=2/RE=1734177744/RO=10/RU=https%3a%2f%2fwww.instagram.com%2fNBAStore%2f/RK=2/RS=annVJznk3wWT0kNBNcA03zJi4_U-"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/watch?v=Z53N1Hf2sRs"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-contact">
+                <h3>CONTACT INFO</h3>
+                <p>📍 State Road 54 Trinity, Florida</p>
+                <p>📞 Call: (99) 124 1242 12</p>
+                <p>🕒 8:00-18:00, Sat Closed</p>
+            </div>
         </div>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
