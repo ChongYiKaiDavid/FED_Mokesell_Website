@@ -241,3 +241,28 @@ let header = document.querySelector('header');
 menuToggle.onclick = function(){
     header.classList.toggle('active');
 }
+//review js
+document.addEventListener("DOMContentLoaded", function() {
+  const stars = document.querySelectorAll(".star");
+  const ratingText = document.getElementById("rating-text");
+  const submitBtn = document.getElementById("submit-btn");
+
+  const ratingDescriptions = ["Terrible", "Bad", "Okay", "Good", "Amazing"];
+
+  stars.forEach(star => {
+      star.addEventListener("click", function() {
+          let rating = parseInt(this.getAttribute("data-value"));
+
+          stars.forEach(s => s.classList.remove("active"));
+          for (let i = 0; i < rating; i++) {
+              stars[i].classList.add("active");
+          }
+
+          ratingText.textContent = ratingDescriptions[rating - 1];
+      });
+  });
+
+  submitBtn.addEventListener("click", function() {
+      alert("Your review has been submitted! Thank you.");
+  });
+});

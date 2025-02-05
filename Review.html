@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Product - Mokesell</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1 class="logo">Mokesell</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">Profiles</a>
+            <a href="#">Contact</a>
+            <a href="#">Feedback</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Rate product</h2>
+        <img src="product-image.jpg" alt="Product Image" class="product-image">
+
+        <div class="rating-container">
+            <p>Product quality</p>
+            <div class="stars" id="star-rating">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+            <span id="rating-text">Amazing</span>
+        </div>
+
+        <div class="review-box">
+            <label>Quality:</label>
+            <textarea placeholder="Write about this aspect"></textarea>
+
+            <label>Appearance:</label>
+            <textarea placeholder="Write about this aspect"></textarea>
+
+            <textarea placeholder="Share more about the product"></textarea>
+        </div>
+
+        <button id="submit-btn">Submit →</button>
+    </main>
+</body>
+</html>
