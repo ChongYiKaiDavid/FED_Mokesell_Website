@@ -266,3 +266,28 @@ document.addEventListener("DOMContentLoaded", function() {
       alert("Your review has been submitted! Thank you.");
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("MokeSell Website Loaded!");
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (event) {
+          event.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+              target.scrollIntoView({ behavior: "smooth" });
+          }
+      });
+  });
+
+  // Show alert when "Check it Out!" buttons are clicked
+  document.querySelectorAll(".banner-btn").forEach(button => {
+      button.addEventListener("click", function (event) {
+          event.preventDefault();
+          alert("Redirecting to product details...");
+          window.location.href = this.getAttribute("href");
+      });
+  });
+});
