@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mokeSell Website</title>
+    <title>MokeSell Website</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
 </head>
 <body>
-    <header class="header">
-        <div class="logo">
+    <header class="header"><div class="logo">
             <h1>MokeSell</h1>
         </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for products..." id="searchInput"> 
+            <button id="searchButton"><i class="fas fa-search"></i></button>
+        </div>
+        
+        
         <nav class="nav">
             <ul>
                 <li><a href="#">Home</a></li>
@@ -24,10 +29,7 @@
             </ul>
         </nav>
     </header>
-    <section class="banner">
-        <div class="banner-content">
-        </div>
-    </section>
+    
     <!--About-->
     <section id="about-section" class="about-section">
         <div class="about-container">
@@ -61,25 +63,34 @@
     </section>
 
     <section class="categories">
-        <div class="category">
-            <img src="https://i.etsystatic.com/13826775/r/il/504425/5380229319/il_fullxfull.5380229319_co44.jpg" alt="Facial Care">
-            <div class="overlay">
-                <p>Facial Care</p>
+        <a href="Facial Care page.html" class="category-link">
+            <div class="category">
+                <img src="https://i.etsystatic.com/13826775/r/il/504425/5380229319/il_fullxfull.5380229319_co44.jpg" alt="Facial Care">
+                <div class="overlay">
+                    <p>Facial Care</p>
+                </div>
             </div>
-        </div>
-        <div class="category">
-            <img src="https://www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.1,f_auto/w_280/prd-emea/sys-master/content/P1/h5b/h36/10674361270302-MEGA-MENU_MOBILE_560x314_TRIO_N5-BLEU-CCM(1).jpg%20280w,//www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.1,f_auto/w_350/prd-emea/sys-master/content/P1/h5b/h36/10674361270302-MEGA-MENU_MOBILE_560x314_TRIO_N5-BLEU-CCM(1).jpg%20350w,//www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.1,f_auto/w_560/prd-emea/sys-master/content/P1/h5b/h36/10674361270302-MEGA-MENU_MOBILE_560x314_TRIO_N5-BLEU-CCM(1).jpg%20560w" alt="Perfumes">
-            <div class="overlay">
-                <p>Perfumes</p>
+        </a>
+    
+        <a href="perfumes.html" class="category-link">
+            <div class="category">
+                <img src="https://www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.1,f_auto/w_280/prd-emea/sys-master/content/P1/h5b/h36/10674361270302-MEGA-MENU_MOBILE_560x314_TRIO_N5-BLEU-CCM(1).jpg%20280w,//www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.1,f_auto/w_350/prd-emea/sys-master/content/P1/h5b/h36/10674361270302-MEGA-MENU_MOBILE_560x314_TRIO_N5-BLEU-CCM(1).jpg%20350w,//www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.1,f_auto/w_560/prd-emea/sys-master/content/P1/h5b/h36/10674361270302-MEGA-MENU_MOBILE_560x314_TRIO_N5-BLEU-CCM(1).jpg%20560w" alt="Perfumes">
+                <div class="overlay">
+                    <p>Perfumes</p>
+                </div>
             </div>
-        </div>
-        <div class="category">
-            <img src="https://img.freepik.com/premium-photo/women-s-fashion-store-shopping-center_1112-9614.jpg?w=360" alt="Clothing">
-            <div class="overlay">
-                <p>Clothing</p>
+        </a>
+    
+        <a href="clothing.html" class="category-link">
+            <div class="category">
+                <img src="https://img.freepik.com/premium-photo/women-s-fashion-store-shopping-center_1112-9614.jpg?w=360" alt="Clothing">
+                <div class="overlay">
+                    <p>Clothing</p>
+                </div>
             </div>
-        </div>
+        </a>
     </section>
+     
     <!-- Reviews -->
     <div class="testimonial-section">
         <button class="nav-btn" id="prevBtn">&#8592;</button>
@@ -104,10 +115,10 @@
         </div>
     
         <button class="nav-btn" id="nextBtn">&#8594;</button>
-        
+        <script src="script.js"></script>
     </div>
     
-    <script src="script.js"></script>
+    
     
     <!-- Best selling products -->
     <section class="best-selling">

@@ -1,293 +1,75 @@
-document.querySelectorAll('.feedback-form button').forEach(button => {
-    button.addEventListener('click', () => {
-      alert(`You selected: ${button.textContent}`);
-    });
-  });
-  
-  const playBoard = document.querySelector(".play-board");
-  const scoreElement = document.querySelector(".score");
-  const highScoreElement = document.querySelector(".high-score");
-  const controls = document.querySelectorAll(".controls i");
-  const coverPrompt = document.querySelector(".cover");
-  const gameSection = document.querySelector(".game");
-  const submitButton = document.querySelector(".submit-button");
-  
-  const restartPrompt = document.querySelector(".restart-prompt");
-  const restartButton = document.querySelector(".restart-button");
-  
-  let gameOver = false;
-  let foodXCoords, foodYCoords;
-  let snakeXCoords = 16,
-    snakeYCoords = 16;
-  let snakeVelocityX = 0,
-    snakeVelocityY = 0;
-  let snakeBody = [];
-  let setIntervalId;
-  let score = 0;
-  let highScore = localStorage.getItem("high-score") || 0;
-  highScoreElement.innerHTML = `High Score: ${highScore}`;
-  
-  let usernameSubmitted = false;
-  
-  const changeFoodPosition = () => {
-    foodXCoords = Math.floor(Math.random() * 29) + 1;
-    foodYCoords = Math.floor(Math.random() * 31) + 1;
-  };
-  
-  const handleGameOver = () => {
-    const testurl = "https://feddddd-6882.restdb.io/rest/assignment2leaderboard";
-    const testapikey = "65c4358c86354f3586464a0d";
-    if (!gameOver) {
-      gameOver = true;
-      console.log("game has ended!");
-  
-      // Post score to the server
-      if (usernameSubmitted) {
-        const postData = {
-          name: document.getElementById("username").value,
-          score: score,
-        };
-  
-        const settings = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-apikey": testapikey, // Assuming you have the testapikey defined
-            "cache-control": "no-cache",
-          },
-          body: JSON.stringify(postData),
-        };
-  
-        fetch(testurl, settings)
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("Score posted successfully:", data);
-            // Optionally, you can handle success response here
-          })
-          .catch((error) => {
-            console.error("Error posting score:", error);
-            // Optionally, you can handle error here
-          });
-      }
-  
-      restartPrompt.style.display = "flex";
-      restartButton.addEventListener("click", function () {
-        console.log("button has been clicked.");
-        restartPrompt.style.display = "none";
-        clearInterval(setIntervalId);
-        resetGame();
-        startGame();
-        gameOver = false;
-      });
-    }
-  };
-  
-  const changeDirection = (e) => {
-    if (gameOver || !usernameSubmitted) {
-      return;
-    }
-  
-    if (e.key === "w" && snakeVelocityY !== 1) {
-      snakeVelocityX = 0;
-      snakeVelocityY = -1;
-    } else if (e.key === "s" && snakeVelocityY !== -1) {
-      snakeVelocityX = 0;
-      snakeVelocityY = 1;
-    } else if (e.key === "d" && snakeVelocityX !== -1) {
-      snakeVelocityX = 1;
-      snakeVelocityY = 0;
-    } else if (e.key === "a" && snakeVelocityX !== 1) {
-      snakeVelocityX = -1;
-      snakeVelocityY = 0;
-    }
-  };
-  
-  controls.forEach((key) => {
-    key.addEventListener("click", () =>
-      changeDirection({ key: key.dataset.key })
-    );
-  });
-  
-  const resetGame = () => {
-    snakeXCoords = 16;
-    snakeYCoords = 16;
-    snakeVelocityX = 0;
-    snakeVelocityY = 0;
-    snakeBody = [];
-    score = 0;
-    changeFoodPosition();
-    updateScoreDisplay();
-  };
-  
-  const updateScoreDisplay = () => {
-    scoreElement.innerHTML = `Score: ${score}`;
-    localStorage.setItem("high-score", highScore);
-    highScoreElement.innerHTML = `High Score: ${highScore}`;
-  };
-  
-  const startGame = () => {
-    setIntervalId = setInterval(initGame, 150);
-  };
-  
-  const initGame = () => {
-    if (gameOver) return handleGameOver();
-  
-    let htmlMarkup = `<div class="food" style="grid-area: ${foodYCoords} / ${foodXCoords}"></div>`;
-    htmlMarkup += `<div class="snake" style="grid-area: ${snakeYCoords} / ${snakeXCoords}"></div>`;
-  
-    if (snakeXCoords === foodXCoords && snakeYCoords === foodYCoords) {
-      changeFoodPosition();
-      snakeBody.push([foodXCoords, foodYCoords]);
-      score++;
-      highScore = score > highScore ? score : highScore;
-  
-      updateScoreDisplay();
-    }
-  
-    for (let i = snakeBody.length - 1; i > 0; i--) {
-      snakeBody[i] = snakeBody[i - 1];
-    }
-  
-    snakeBody[0] = [snakeXCoords, snakeYCoords];
-  
-    snakeXCoords += snakeVelocityX;
-    snakeYCoords += snakeVelocityY;
-  
-    if (
-      snakeXCoords < 1 ||
-      snakeXCoords >= 32 ||
-      snakeYCoords < 1 ||
-      snakeYCoords >= 30
-    ) {
-      handleGameOver();
-    }
-  
-    for (let i = 0; i < snakeBody.length; i++) {
-      if (i === 0 || (i !== 0 && snakeBody[i])) {
-        htmlMarkup += `<div class="snake" style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`;
-      }
-  
-      if (
-        i !== 0 &&
-        snakeBody[0][1] === snakeBody[i][1] &&
-        snakeBody[0][0] === snakeBody[i][0]
-      ) {
-        handleGameOver();
-      }
-    }
-    playBoard.innerHTML = htmlMarkup;
-  };
-  
-  const handleCoverDisappearance = () => {
-    usernameSubmitted = true;
-    coverPrompt.style.display = "none";
-    gameSection.style.display = "flex";
-    document.body.style.overflowY = "scroll";
-    resetGame();
-    startGame();
-  };
-  
-  function buttonClicked() {
-    handleCoverDisappearance();
-  }
-  
-  changeFoodPosition();
-  startGame();
-  document.addEventListener("keydown", changeDirection);
-
-//api js
-document.addEventListener('DOMContentLoaded', function () {
-  const fetchButton = document.getElementById('fetchButton');
-  const resultContainer = document.getElementById('resultContainer');
-
-  // Event listener for the button
-  fetchButton.addEventListener('click', fetchData);
-
-  async function fetchData() {
-    resultContainer.innerHTML = '<p>Loading...</p>';
-
-    try {
-      // Fetching data from a placeholder API
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      
-      // Display the data
-      displayData(data);
-    } catch (error) {
-      resultContainer.innerHTML = `<p>Error: ${error.message}</p>`;
-    }
-  }
-
-  function displayData(data) {
-    resultContainer.innerHTML = '';
-    data.slice(0, 5).forEach((item) => {
-      const postDiv = document.createElement('div');
-      postDiv.className = 'post';
-      postDiv.innerHTML = `
-        <h3>${item.title}</h3>
-        <p>${item.body}</p>
-      `;
-      resultContainer.appendChild(postDiv);
-    });
-  }
+//search bar
+document.getElementById("searchButton").addEventListener("click", function () {
+  let query = document.getElementById("searchInput").value.toLowerCase();
+  alert("You searched for: " + query);
 });
-//overlord js
-let menuToggle = document.querySelector('.menu-toggle');
-let header = document.querySelector('header');
-menuToggle.onclick = function(){
-    header.classList.toggle('active');
+
+//Reviews
+const carousel = document.querySelector(".carousel");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+prevBtn.addEventListener("click", () => {
+    carousel.scrollBy({ left: -220, behavior: "smooth" });
+});
+
+nextBtn.addEventListener("click", () => {
+    carousel.scrollBy({ left: 220, behavior: "smooth" });
+});
+  
+
+
+const testimonials = [
+    {
+        text: "“I've tried countless moisturizers, but this one is a game-changer! My skin feels softer, smoother, and stays hydrated all day without feeling greasy. It's the perfect balance!”",
+        name: "Emilia Murray",
+        img: "https://randomuser.me/api/portraits/women/45.jpg"
+    },
+    {
+        text: "“Absolutely love this product! It made my skin glow and feel amazing. Highly recommend to anyone looking for quality skincare!”",
+        name: "Sophia Williams",
+        img: "https://randomuser.me/api/portraits/women/50.jpg"
+    },
+    {
+        text: "“This is the best serum I've ever used! It absorbs quickly and leaves my skin feeling refreshed and hydrated. A must-have!”",
+        name: "Olivia Carter",
+        img: "https://randomuser.me/api/portraits/women/32.jpg"
+    }
+];
+
+let currentIndex = 0;
+
+function showTestimonial(index) {
+    const testimonialText = document.getElementById("testimonial");
+    const profileImg = document.getElementById("profileImg");
+    const name = document.getElementById("name");
+    const dots = document.querySelectorAll(".dot");
+
+    if (index >= testimonials.length) {
+        index = 0;
+    } else if (index < 0) {
+        index = testimonials.length - 1;
+    }
+
+    currentIndex = index;
+
+    testimonialText.innerHTML = testimonials[index].text;
+    profileImg.src = testimonials[index].img;
+    name.innerHTML = testimonials[index].name;
+
+    dots.forEach(dot => dot.classList.remove("active"));
+    dots[index].classList.add("active");
 }
-//review js
-document.addEventListener("DOMContentLoaded", function() {
-  const stars = document.querySelectorAll(".star");
-  const ratingText = document.getElementById("rating-text");
-  const submitBtn = document.getElementById("submit-btn");
 
-  const ratingDescriptions = ["Terrible", "Bad", "Okay", "Good", "Amazing"];
-
-  stars.forEach(star => {
-      star.addEventListener("click", function() {
-          let rating = parseInt(this.getAttribute("data-value"));
-
-          stars.forEach(s => s.classList.remove("active"));
-          for (let i = 0; i < rating; i++) {
-              stars[i].classList.add("active");
-          }
-
-          ratingText.textContent = ratingDescriptions[rating - 1];
-      });
-  });
-
-  submitBtn.addEventListener("click", function() {
-      alert("Your review has been submitted! Thank you.");
-  });
+document.getElementById("prevBtn").addEventListener("click", () => {
+    showTestimonial(currentIndex - 1);
 });
 
-
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("MokeSell Website Loaded!");
-
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function (event) {
-          event.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-              target.scrollIntoView({ behavior: "smooth" });
-          }
-      });
-  });
-
-  // Show alert when "Check it Out!" buttons are clicked
-  document.querySelectorAll(".banner-btn").forEach(button => {
-      button.addEventListener("click", function (event) {
-          event.preventDefault();
-          alert("Redirecting to product details...");
-          window.location.href = this.getAttribute("href");
-      });
-  });
+document.getElementById("nextBtn").addEventListener("click", () => {
+    showTestimonial(currentIndex + 1);
 });
+
+// Auto Slide Every 5 Seconds
+setInterval(() => {
+    showTestimonial(currentIndex + 1);
+}, 3000);
