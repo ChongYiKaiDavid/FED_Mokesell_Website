@@ -86,3 +86,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 500);
 });
 
+//search bar
+document.getElementById("searchButton").addEventListener("click", function () {
+  let query = document.getElementById("searchInput").value.toLowerCase();
+  let products = document.querySelectorAll(".product-card, .product-card2");
+
+  products.forEach((product) => {
+      let productName = product.getAttribute("data-name");
+      
+      if (productName.includes(query)) {
+          product.style.display = "block"; // Show matching products
+      } else {
+          product.style.display = "none"; // Hide non-matching products
+      }
+  });
+});
