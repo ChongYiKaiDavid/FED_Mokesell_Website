@@ -51,7 +51,20 @@
   background-color: #000;
   color: #fff;
 }
+.header-icons {
+  display: flex;
+  gap: 15px;
+}
 
+.header-icons a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: white; /* Set icon color to white */
+}
+
+.header-icons a:hover {
+  color: #f1c40f; /* Optional: Change color when hovered (gold in this case) */
+}
 .logo h1 {
   font-size: 24px;
   font-weight: bold;
@@ -1022,38 +1035,3 @@ h1 {
   font-size: 18px;
 }
 
-/* clothes banner */
-.clothing-banner {
-  width: 100%;
-  max-width: 1000px;
-  margin: 50px auto;
-  position: relative; /* Allows text to overlay the image */
-  border-radius: 15px;
-  overflow: hidden; /* Ensures no content spills outside */
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.clothing-banner-image img {
-  width: 110%;
-  display: block;
-}
-
-.clothing-banner-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Centers text */
-  text-align: center;
-  color: rgb(0, 0, 0);
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.clothing-banner-text h1 span {
-  font-size: 40px;
-  font-weight: bold;
-}
-
-.clothing-banner-text p {
-  font-size: 18px;
-}
