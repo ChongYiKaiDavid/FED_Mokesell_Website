@@ -1176,3 +1176,101 @@ select {
 .add-to-cart:hover {
   background-color: #219150;
 }
+
+/* Banner Section */
+.banner-section {
+  width: 100%;
+  background: linear-gradient(to right, #FFD700, #FFA500, #FF4500); /* Warm gold to orange-red gradient */
+  padding: 20px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Banner Container */
+.banner-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+}
+
+/* Banner Text */
+.banner-text {
+  color: white;
+  font-size: 18px;
+  max-width: 50%;
+}
+
+.banner-text h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.banner-text p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* Call-to-Action Button */
+.banner-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #000;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.banner-btn:hover {
+  background: #FFD700;
+  color: black;
+}
+
+/* Image Slider */
+.slider-container {
+  position: relative;
+  max-width: 400px;
+  overflow: hidden;
+}
+
+.banner-image {
+  display: none;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.banner-image.active {
+  display: block;
+}
+
+/* Navigation Arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.arrow-left {
+  left: 10px;
+}
+
+.arrow-right {
+  right: 10px;
+}
+
+.arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+}

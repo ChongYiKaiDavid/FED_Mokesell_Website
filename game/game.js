@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 const startGameBtn = document.getElementById("startGameBtn");
 const leaderboardList = document.getElementById("leaderboard-list");
 
-const API_URL = "https://davidchong-6ae9.restdb.io/rest/leaderboard ";
+const API_URL = "https://davidchong-6ae9.restdb.io/rest/leaderboard";
 const API_KEY = "67a6f075cab64154577265ac";
 
 canvas.width = 400;
@@ -14,7 +14,7 @@ let snake = [{ x: 200, y: 200 }];
 let direction = "RIGHT";
 let food = generateFood();
 let score = 0;
-let gameRunning = false; // Initially, game is paused
+let gameRunning = false;
 
 // Control Snake with Keyboard
 document.addEventListener("keydown", changeDirection);
@@ -119,39 +119,101 @@ function restartGame() {
 async function saveScore(score) {
     const playerName = prompt("Enter your name:", "Player");
     if (!playerName) return;
-    
-    const data = {
-        name: playerName,
-        score: score
-    };
-    
-    await fetch(API_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "x-apikey": API_KEY
-        },
-        body: JSON.stringify(data)
-    });
-    loadLeaderboard();
+
+    const data = { name: playerName, score: score };
+
+    try {
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": API_KEY
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            console.error("Failed to save score:", response.status, response.statusText);
+        } else {
+            console.log("Score saved successfully!");
+            loadLeaderboard(); // Refresh leaderboard after saving
+        }
+    } catch (error) {
+        console.error("Error saving score:", error);
+    }
 }
+
 
 // Load Leaderboard from RestDB.io
 async function loadLeaderboard() {
-    const response = await fetch(API_URL + "?sort=score&dir=-1&max=5", {
-        headers: { "x-apikey": API_KEY }
-    });
-    const scores = await response.json();
+    // Check if leaderboard data exists in local storage
+    let cachedData = localStorage.getItem("leaderboardData");
+    if (cachedData) {
+        console.log("Using cached leaderboard data");
+        displayLeaderboard(JSON.parse(cachedData));
+        return;
+    }
+
+    console.log("Fetching leaderboard from API...");
+    try {
+        const response = await fetch(`${API_URL}?sort=score&dir=-1&max=5`, {
+            headers: { "x-apikey": API_KEY }
+        });
+
+        if (!response.ok) {
+            console.error("Failed to fetch leaderboard:", response.status, response.statusText);
+            return;
+        }
+
+        const scores = await response.json();
+        localStorage.setItem("leaderboardData", JSON.stringify(scores)); // Cache data
+        displayLeaderboard(scores);
+    } catch (error) {
+        console.error("Error loading leaderboard:", error);
+    }
+}
+
+// Helper function to display leaderboard
+function displayLeaderboard(scores) {
     leaderboardList.innerHTML = "";
-    scores.forEach((entry) => {
+
+    if (scores.length === 0) {
+        leaderboardList.innerHTML = "<li>No scores available.</li>";
+        return;
+    }
+
+    scores.forEach((entry, index) => {
         const li = document.createElement("li");
-        li.textContent = `${entry.name}: ${entry.score}`;
+        li.innerHTML = `<span class="rank">${index + 1}.</span> <span class="player-name">${entry.name}</span> <span class="player-score">${entry.score}</span>`;
         leaderboardList.appendChild(li);
     });
 }
+
+
 
 // Event Listener for Start Game Button
 startGameBtn.addEventListener("click", startGame);
 
 // Load leaderboard on page load
 document.addEventListener("DOMContentLoaded", loadLeaderboard);
+
+// Function to Clear Leaderboard (Optional)
+async function clearLeaderboard() {
+    if (!confirm("Are you sure you want to clear the leaderboard?")) return;
+
+    try {
+        const response = await fetch(API_URL, {
+            headers: { "x-apikey": API_KEY }
+        });
+        const scores = await response.json();
+        for (const entry of scores) {
+            await fetch(`${API_URL}/${entry._id}`, {
+                method: "DELETE",
+                headers: { "x-apikey": API_KEY }
+            });
+        }
+        loadLeaderboard();
+    } catch (error) {
+        console.error("Error clearing leaderboard:", error);
+    }
+}
