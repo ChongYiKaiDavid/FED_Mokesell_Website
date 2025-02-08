@@ -73,3 +73,16 @@ document.getElementById("nextBtn").addEventListener("click", () => {
 setInterval(() => {
     showTestimonial(currentIndex + 1);
 }, 3000);
+
+document.addEventListener("DOMContentLoaded", function () {
+    const bannerText = document.querySelector(".banner-text");
+    
+    // Smooth fade-in effect
+    bannerText.style.opacity = "0";
+    bannerText.style.transition = "opacity 1.5s ease-in-out";
+    
+    setTimeout(() => {
+        bannerText.style.opacity = "1";
+    }, 500);
+});
+

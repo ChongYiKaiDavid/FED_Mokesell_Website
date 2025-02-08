@@ -1022,3 +1022,78 @@ h1 {
   font-size: 18px;
 }
 
+/* Banner Section Styling */
+.banner-section {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-color: #f8f9fa; /* Fallback background color */
+}
+
+/* Ensure Banner Image is Visible */
+.banner-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Fix Lottie Animation Placement */
+.lottie-container {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  width: 250px;
+  height: 250px;
+}
+
+/* Fix Text Placement */
+.banner-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Fix Button Styling */
+.banner-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 25px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #ff6b6b, #ff4757);
+  text-decoration: none;
+  border-radius: 10px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out, background 0.3s ease-in-out;
+}
+
+.banner-btn:hover {
+  background: linear-gradient(135deg, #ff4757, #e84393);
+  transform: scale(1.1);
+}
+
+
+/* GIF Animation Styling */
+.gif-container {
+  position: absolute;
+  top: 50%;
+  left: 5%; /* Adjust left position */
+  transform: translateY(-50%);
+}
+
+.gif-animation {
+  width: 120px; /* Adjust size */
+  height: auto;
+}
+.gif-animation:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
