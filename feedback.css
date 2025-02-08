@@ -1,0 +1,138 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header */
+.header {
+    width: 100%;
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Banner Section */
+.banner {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.banner h2 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+/* Banner Images */
+.banner img {
+    width: 150px;
+    height: auto;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+/* Main Container */
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Elements */
+select, textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Submit Button */
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Assigned Feedback Display */
+.feedback-item {
+    background: #f8f8f8;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: left;
+}
+
+/* Rating Buttons */
+.rating {
+    margin-top: 10px;
+}
+
+.rating button {
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #ffcc00;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.rating button:hover {
+    background-color: #ff9900;
+}
+
+/* Footer */
+.footer {
+    margin-top: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Back to Home Button */
+.home-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.home-button:hover {
+    background-color: #218838;
+}

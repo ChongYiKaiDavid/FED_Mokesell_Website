@@ -3,95 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MokeSell Website</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <title>MokeSell Gamified Shopping</title>
+    <link rel="stylesheet" href="game/game.css">
 </head>
 <body>
+
+    <!-- Header -->
     <header class="header">
         <div class="logo">
             <h1>MokeSell Game</h1>
         </div>
-        <div class="search-bar">
-            <input type="text" placeholder="Search for products..." id="searchInput"> 
-            <button id="searchButton"><i class="fas fa-search"></i></button>
-        </div>
         <nav class="nav">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a id="products.html" href="#">Products</a></li>
-                <li><a id="blog-link" href="#">Blog</a></li>
-                <li><a id="contact-link" href="#contact-section">Contact</a></li>
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="shop.html">🛒 Shop</a></li>
+                <li><a href="#">🏆 Rewards</a></li>
+                <li><a href="#">📜 Leaderboard</a></li>
+                <li><a href="profile.html">👤 Profile</a></li>
             </ul>
         </nav>
-        <div class="header-icons">
-            <a href="cart.html" id="cart-link"><i class="fas fa-shopping-cart"></i></a>
-            <a href="profile.html" id="profile-link"><i class="fas fa-user"></i></a>
-        </div>
     </header>
-</body>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game</title>
 
-    <!-- Link to separate Snake Game CSS -->
-    <link rel="stylesheet" href="game/game.css">
-    
-    <!-- Ensure script.js does not interfere -->
-    <script defer src="game/game.js"></script>
-</head>
-<!-- How to Play Section -->
-<section class="how-to-play">
-    <h2>How to Play Snake Game</h2>
-    <div class="rules-container">
-        <!-- Rule 1: Use Arrow Keys to Move -->
-        <div class="rule">
-            <img src="https://media.giphy.com/media/3o6Zt8MgUuvSbkZYWc/giphy.gif" alt="Use Arrow Keys">
-            <p><strong>Use Arrow Keys</strong> to move the snake in different directions.</p>
-        </div>
-
-        <!-- Rule 2: Eat Food to Grow -->
-        <div class="rule">
-            <img src="https://media.giphy.com/media/3o7abldj0b3rxrZUxW/giphy.gif" alt="Eat Food">
-            <p><strong>Eat the red dots</strong> to grow the snake and increase your score.</p>
-        </div>
-
-        <!-- Rule 3: Avoid Hitting Walls -->
-        <div class="rule">
-            <img src="https://files.oaiusercontent.com/file-Sw4uNbG71v1cqFJz1VekxK?se=2025-02-08T08%3A43%3A21Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D31a6316c-0e3a-4470-a1b7-219247121564.webp&sig=5SBKmaK0Yo7CfWpruje9abIhcWphlKwQjThhZAaQL4Q%3D" alt="Game Over">
-            <p><strong>Avoid hitting the walls or yourself</strong>, or the game will end!</p>
-        </div>
-    </div>
-</section>
-
-<body>
+    <!-- Game Container -->
     <div class="game-container">
-        <h1>Snake Game</h1>
+        <h1>🐍 Snake Shopping Game</h1>
         
-        <!-- Start Game Button -->
         <button id="startGameBtn">Start Game</button>
-    
         <canvas id="gameCanvas"></canvas>
-        
         <p>Score: <span id="score">0</span></p>
+        
         <button onclick="restartGame()">Restart Game</button>
         
-        <br>
-        <a href="index.html" class="back-button">Back to Home</a>
+        <!-- Loyalty Rewards Section -->
+        <div class="rewards-section">
+            <h2>🎉 Earn Loyalty Rewards!</h2>
+            <p>Play to unlock rewards like discounts and store credits.</p>
+            <button onclick="claimReward()">Claim Reward</button>
+        </div>
+
+        <!-- eCommerce Shop -->
+        <div class="shop-section">
+            <h2>🛍️ In-Game Shop</h2>
+            <p>Spend points to buy rewards!</p>
+            <button onclick="openShop()">Visit Shop</button>
+        </div>
+        
+        <!-- Leaderboard -->
+        <section class="leaderboard">
+            <h2>🏅 Leaderboard</h2>
+            <ol id="leaderboard-list"></ol>
+            <button onclick="clearLeaderboard()">Clear Leaderboard</button>
+        </section>
+
+        <!-- Back to Home Button -->
+        <a href="index.html" class="back-button">🏠 Back to Home</a>
+    </div>
+    <div class="rewards-section">
+        <h2>🎉 Earn Loyalty Rewards!</h2>
+        <p>Play to unlock rewards like discounts and store credits.</p>
+        <button onclick="claimReward()">Claim Reward</button>
     </div>
     
-</body>
-<!-- Leaderboard Section -->
-<section class="leaderboard">
-    <h2>Leaderboard</h2>
-    <ol id="leaderboard-list">
-        <!-- Scores will be loaded dynamically -->
-    </ol>
-    <button onclick="clearLeaderboard()">Clear Leaderboard</button>
-</section>
 
+    <script src="game/game.js"></script>
+</body>
+</html>
 
 <footer class="footer">
     <div class="footer-container">

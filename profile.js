@@ -1,62 +1,57 @@
-document.addEventListener("DOMContentLoaded", () => {
-    let user = JSON.parse(localStorage.getItem("loggedInUser"));
-    
-    if (!user) {
+const API_URL = "https://mokesell-d690.restdb.io/rest/userinfo";
+const API_KEY = "67a777184d8744758f828036"; // Your new API key
+
+document.addEventListener("DOMContentLoaded", async () => {
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    if (!loggedInUser) {
         window.location.href = "login.html"; // Redirect to login if not logged in
     } else {
-        loadUserProfile();
-        loadProducts();
+        await loadUserProfile();
         setupLogoutButton();
     }
 });
 
-// Load the user's profile dynamically
-function loadUserProfile() {
-    let user = JSON.parse(localStorage.getItem("loggedInUser"));
+// ✅ Load the User's Profile Data from RESTdb
+async function loadUserProfile() {
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    let userId = loggedInUser._id;
 
-    if (user) {
-        document.getElementById("profile-name").innerText = user.name;
-        document.getElementById("profile-email").innerText = user.email;
-    } else {
-        document.getElementById("profile-name").innerText = "Guest";
-        document.getElementById("profile-email").innerText = "guest@example.com";
+    try {
+        let response = await fetch(`${API_URL}/${userId}`, {
+            method: "GET",
+            headers: {
+                "x-apikey": API_KEY,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch user profile");
+        }
+
+        let userData = await response.json();
+
+        document.getElementById("profile-name").innerText = userData.name;
+        document.getElementById("profile-email").innerText = userData.email;
+
+        // ✅ Update Balance Display
+        if (userData.balance !== undefined) {
+            document.getElementById("profile-balance").innerText = `Balance: $${userData.balance.toFixed(2)}`;
+        }
+    } catch (error) {
+        console.error("Error fetching user profile:", error);
     }
 }
 
-// Load products dynamically
-function loadProducts() {
-    let products = JSON.parse(localStorage.getItem("userProducts")) || [];
-    let productContainer = document.getElementById("product-list");
-
-    productContainer.innerHTML = ""; // Clear the container
-
-    if (products.length === 0) {
-        productContainer.innerHTML = "<p>No products added yet.</p>";
-    } else {
-        products.forEach(product => {
-            let productElement = document.createElement("div");
-            productElement.classList.add("product-item");
-            productElement.innerHTML = `
-                <img src="${product.image}" alt="${product.name}">
-                <p>${product.name}</p>
-                <span>$${product.price}</span>
-            `;
-            productContainer.appendChild(productElement);
+// ✅ Logout Function (Clears Session)
+function setupLogoutButton() {
+    const logoutButton = document.getElementById("logout-btn");
+    if (logoutButton) {
+        logoutButton.addEventListener("click", () => {
+            localStorage.removeItem("loggedInUser"); // Remove user session
+            window.location.href = "login.html"; // Redirect to login page
         });
     }
 }
 
-// Logout function
-function setupLogoutButton() {
-    const logoutBtn = document.createElement("button");
-    logoutBtn.innerText = "Logout";
-    logoutBtn.id = "logout-btn";
-    logoutBtn.style.cssText = "background-color: red; color: white; border: none; padding: 8px 15px; cursor: pointer; margin-top: 10px;";
-
-    logoutBtn.addEventListener("click", () => {
-        localStorage.removeItem("loggedInUser"); // Remove user session
-        window.location.href = "login.html"; // Redirect to login page
-    });
-
-    document.querySelector(".profile-text").appendChild(logoutBtn);
-}

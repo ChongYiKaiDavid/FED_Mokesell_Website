@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <!-- Header from index.html -->
+    <!-- Header -->
     <header class="header">
         <div class="logo">
             <h1>MokeSell</h1>
@@ -24,9 +24,9 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Products</a></li>
-                <li><a href="#">Profiles</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Feedback</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
             </ul>
         </nav>
         <div class="header-icons">
@@ -42,17 +42,21 @@
                 <div class="profile-text">
                     <h2 id="profile-name">Guest</h2>
                     <p id="profile-email">guest@example.com</p>
+                    <p id="profile-balance">Balance: $0.00</p>
                     <button id="edit-profile">Edit Profile</button>
+                    <button id="logout-btn">Logout</button>
                 </div>
             </div>
         </div>
 
-
-
         <div class="profile-actions">
             <div class="action">
-                <img src="https://cdn2.iconfinder.com/data/icons/new-year-resolutions/64/resolutions-16-512.png" alt="Balance">
-                <p>Balance</p>
+                <a href="addbalance.html">
+                    <img src="https://cdn2.iconfinder.com/data/icons/new-year-resolutions/64/resolutions-16-512.png" 
+                         alt="Balance" 
+                         style="width: 50px; height: 50px; cursor: pointer;">
+                </a>
+                <p>Add Balance</p>
             </div>
             <div class="action">
                 <img src="https://cdn-icons-png.flaticon.com/512/7959/7959174.png" alt="Purchases">
@@ -60,7 +64,7 @@
             </div>
             <div class="action">
                 <img src="https://www.iconpacks.net/icons/2/free-review-like-icon-2799-thumb.png" alt="Your reviews">
-                <p>Your reviews</p>
+                <p>Your Reviews</p>
             </div>
         </div>
 
@@ -70,12 +74,12 @@
         </section>
     </main>
 
-    <!-- Footer from index.html -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-logo">
                 <h2>MokeSell</h2>
-                <p>Making ecommerce simple and easy</p>
+                <p>Making eCommerce simple and easy</p>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
                     <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
@@ -91,6 +95,5 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>

@@ -1,12 +1,40 @@
-document.addEventListener("DOMContentLoaded", () => {
-    loadCartItems();
+document.addEventListener("DOMContentLoaded", async function () {
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    if (!loggedInUser) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    let userId = loggedInUser._id;
+    let cart = await getUserCart(userId);
+
+    displayCart(cart);
+
+    document.getElementById("cart-items").addEventListener("click", async function (event) {
+        if (event.target.tagName === "BUTTON") {
+            let index = event.target.dataset.index;
+            cart.splice(index, 1);
+            await updateUserCart(userId, cart);
+            displayCart(cart);
+        }
+    });
 });
 
-function loadCartItems() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+async function addToCart(item) {
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    let userId = loggedInUser._id;
+    let cart = await getUserCart(userId);
+
+    cart.push(item);
+    await updateUserCart(userId, cart);
+
+    alert("Item added to cart!");
+}
+
+function displayCart(cart) {
     let cartContainer = document.getElementById("cart-items");
     let totalPrice = 0;
-
     cartContainer.innerHTML = "";
 
     if (cart.length === 0) {
@@ -19,7 +47,7 @@ function loadCartItems() {
                 <img src="${item.image}" alt="${item.name}">
                 <p>${item.name}</p>
                 <p>$${item.price.toFixed(2)}</p>
-                <button onclick="removeItem(${index})">Remove</button>
+                <button data-index="${index}">Remove</button>
             `;
             cartContainer.appendChild(itemElement);
             totalPrice += item.price;
@@ -27,12 +55,4 @@ function loadCartItems() {
     }
 
     document.getElementById("total-price").innerText = totalPrice.toFixed(2);
-    document.getElementById("cart-count").innerText = cart.length;
-}
-
-function removeItem(index) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    loadCartItems();
 }

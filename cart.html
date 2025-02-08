@@ -27,7 +27,16 @@
         <div id="cart-items"></div>
         <div class="cart-total">
             <h3>Total: $<span id="total-price">0.00</span></h3>
-            <button id="checkout-btn">Checkout</button>
+            <button id="checkout-btn" class="px-6 py-3 text-white bg-blue-500 rounded-lg shadow hover:bg-blue-600 transition">
+                Checkout
+            </button>
+            
+            <script>
+                document.getElementById("checkout-btn").addEventListener("click", function() {
+                    window.location.href = "payment.html";
+                });
+            </script>
+            
         </div>
     </main>
 </body>

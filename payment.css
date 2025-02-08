@@ -104,25 +104,69 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 15px 20px;
     background-color: #222;
     color: white;
-  }
-  
-  .header .logo h1 {
+    flex-wrap: wrap; /* Prevents collapsing issues */
+    width: 100%;
+}
+
+/* Logo Styling */
+.header .logo h1 {
     font-size: 24px;
-  }
-  
-  .nav ul {
+    margin: 0; /* Prevents unnecessary margin */
+}
+
+/* Navigation Menu */
+.nav {
+    display: flex;
+    flex-grow: 1; /* Pushes nav to the right */
+    justify-content: flex-end;
+}
+
+/* Navigation List */
+.nav ul {
     list-style: none;
     display: flex;
     gap: 20px;
-  }
-  
-  .nav ul li a {
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Links */
+.nav ul li {
+    display: inline-block;
+}
+
+.nav ul li a {
     color: white;
     text-decoration: none;
     font-size: 14px;
-  }
-  
+    padding: 5px 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.nav ul li a:hover {
+    color: #f4a261; /* Light orange highlight */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
   
