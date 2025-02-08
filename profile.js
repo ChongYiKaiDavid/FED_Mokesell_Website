@@ -1,14 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
-    loadUserProfile();
-    loadProducts();
+    let user = JSON.parse(localStorage.getItem("loggedInUser"));
+    
+    if (!user) {
+        window.location.href = "login.html"; // Redirect to login if not logged in
+    } else {
+        loadUserProfile();
+        loadProducts();
+        setupLogoutButton();
+    }
 });
 
 // Load the user's profile dynamically
 function loadUserProfile() {
-    let user = JSON.parse(localStorage.getItem("loggedInUser")) || { name: "Guest", email: "guest@example.com" };
-    
-    document.getElementById("profile-name").innerText = user.name;
-    document.getElementById("profile-email").innerText = user.email;
+    let user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    if (user) {
+        document.getElementById("profile-name").innerText = user.name;
+        document.getElementById("profile-email").innerText = user.email;
+    } else {
+        document.getElementById("profile-name").innerText = "Guest";
+        document.getElementById("profile-email").innerText = "guest@example.com";
+    }
 }
 
 // Load products dynamically
@@ -34,7 +46,17 @@ function loadProducts() {
     }
 }
 
-// Function to simulate login and store user info
-function loginUser(name, email) {
-    localStorage.setItem("loggedInUser", JSON.stringify({ name, email }));
+// Logout function
+function setupLogoutButton() {
+    const logoutBtn = document.createElement("button");
+    logoutBtn.innerText = "Logout";
+    logoutBtn.id = "logout-btn";
+    logoutBtn.style.cssText = "background-color: red; color: white; border: none; padding: 8px 15px; cursor: pointer; margin-top: 10px;";
+
+    logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("loggedInUser"); // Remove user session
+        window.location.href = "login.html"; // Redirect to login page
+    });
+
+    document.querySelector(".profile-text").appendChild(logoutBtn);
 }

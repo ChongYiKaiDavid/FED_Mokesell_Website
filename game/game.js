@@ -2,9 +2,7 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const startGameBtn = document.getElementById("startGameBtn");
 const leaderboardList = document.getElementById("leaderboard-list");
-
-const API_URL = "https://davidchong-6ae9.restdb.io/rest/leaderboard";
-const API_KEY = "67a6f075cab64154577265ac";
+const leaderboardContainer = document.querySelector(".leaderboard");
 
 canvas.width = 400;
 canvas.height = 400;
@@ -15,11 +13,11 @@ let direction = "RIGHT";
 let food = generateFood();
 let score = 0;
 let gameRunning = false;
+let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
 // Control Snake with Keyboard
 document.addEventListener("keydown", changeDirection);
 
-// Start Game Function
 function startGame() {
     if (!gameRunning) {
         gameRunning = true;
@@ -28,7 +26,6 @@ function startGame() {
     }
 }
 
-// Main Game Loop
 function gameLoop() {
     if (!gameRunning) return;
 
@@ -44,7 +41,6 @@ function gameLoop() {
     setTimeout(gameLoop, 100);
 }
 
-// Move Snake
 function moveSnake() {
     let head = { ...snake[0] };
 
@@ -64,7 +60,6 @@ function moveSnake() {
     }
 }
 
-// Change Direction
 function changeDirection(event) {
     if (!gameRunning) return;
     if (event.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
@@ -73,7 +68,6 @@ function changeDirection(event) {
     if (event.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
 }
 
-// Generate Random Food Position
 function generateFood() {
     return {
         x: Math.floor(Math.random() * (canvas.width / box)) * box,
@@ -81,7 +75,6 @@ function generateFood() {
     };
 }
 
-// Check Collision with Walls or Itself
 function checkCollision() {
     let head = snake[0];
     if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) return true;
@@ -91,7 +84,6 @@ function checkCollision() {
     return false;
 }
 
-// Draw Snake & Food
 function drawGame() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -103,7 +95,6 @@ function drawGame() {
     snake.forEach((segment) => ctx.fillRect(segment.x, segment.y, box, box));
 }
 
-// Restart Game
 function restartGame() {
     gameRunning = false;
     snake = [{ x: 200, y: 200 }];
@@ -115,105 +106,32 @@ function restartGame() {
     loadLeaderboard();
 }
 
-// Save Score to RestDB.io
-async function saveScore(score) {
+function saveScore(score) {
     const playerName = prompt("Enter your name:", "Player");
     if (!playerName) return;
-
-    const data = { name: playerName, score: score };
-
-    try {
-        const response = await fetch(API_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "x-apikey": API_KEY
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-            console.error("Failed to save score:", response.status, response.statusText);
-        } else {
-            console.log("Score saved successfully!");
-            loadLeaderboard(); // Refresh leaderboard after saving
-        }
-    } catch (error) {
-        console.error("Error saving score:", error);
-    }
+    
+    leaderboard.push({ name: playerName, score: score });
+    leaderboard.sort((a, b) => b.score - a.score);
+    leaderboard = leaderboard.slice(0, 5);
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+    loadLeaderboard();
 }
 
-
-// Load Leaderboard from RestDB.io
-async function loadLeaderboard() {
-    // Check if leaderboard data exists in local storage
-    let cachedData = localStorage.getItem("leaderboardData");
-    if (cachedData) {
-        console.log("Using cached leaderboard data");
-        displayLeaderboard(JSON.parse(cachedData));
-        return;
-    }
-
-    console.log("Fetching leaderboard from API...");
-    try {
-        const response = await fetch(`${API_URL}?sort=score&dir=-1&max=5`, {
-            headers: { "x-apikey": API_KEY }
-        });
-
-        if (!response.ok) {
-            console.error("Failed to fetch leaderboard:", response.status, response.statusText);
-            return;
-        }
-
-        const scores = await response.json();
-        localStorage.setItem("leaderboardData", JSON.stringify(scores)); // Cache data
-        displayLeaderboard(scores);
-    } catch (error) {
-        console.error("Error loading leaderboard:", error);
-    }
-}
-
-// Helper function to display leaderboard
-function displayLeaderboard(scores) {
+function loadLeaderboard() {
     leaderboardList.innerHTML = "";
-
-    if (scores.length === 0) {
-        leaderboardList.innerHTML = "<li>No scores available.</li>";
-        return;
-    }
-
-    scores.forEach((entry, index) => {
+    leaderboard.forEach((entry, index) => {
         const li = document.createElement("li");
-        li.innerHTML = `<span class="rank">${index + 1}.</span> <span class="player-name">${entry.name}</span> <span class="player-score">${entry.score}</span>`;
+        li.innerHTML = `<span class='rank'>#${index + 1}</span> <span class='player-name'>${entry.name}</span> <span class='player-score'>${entry.score}</span>`;
         leaderboardList.appendChild(li);
     });
+    leaderboardContainer.style.display = "block";
 }
 
+function clearLeaderboard() {
+    leaderboard = [];
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+    loadLeaderboard();
+}
 
-
-// Event Listener for Start Game Button
 startGameBtn.addEventListener("click", startGame);
-
-// Load leaderboard on page load
 document.addEventListener("DOMContentLoaded", loadLeaderboard);
-
-// Function to Clear Leaderboard (Optional)
-async function clearLeaderboard() {
-    if (!confirm("Are you sure you want to clear the leaderboard?")) return;
-
-    try {
-        const response = await fetch(API_URL, {
-            headers: { "x-apikey": API_KEY }
-        });
-        const scores = await response.json();
-        for (const entry of scores) {
-            await fetch(`${API_URL}/${entry._id}`, {
-                method: "DELETE",
-                headers: { "x-apikey": API_KEY }
-            });
-        }
-        loadLeaderboard();
-    } catch (error) {
-        console.error("Error clearing leaderboard:", error);
-    }
-}

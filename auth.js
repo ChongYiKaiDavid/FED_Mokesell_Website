@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (storedUser && storedUser.password === password) {
                 alert("Login successful!");
-                localStorage.setItem("loggedInUser", email); // Store login state
-                window.location.href = "index.html"; // Redirect to homepage
+                localStorage.setItem("loggedInUser", JSON.stringify({ name: storedUser.name, email })); // Store full user info
+                window.location.href = "profile.html"; // Redirect to profile page
             } else {
                 alert("Invalid email or password.");
             }
