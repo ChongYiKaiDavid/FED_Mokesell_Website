@@ -1,62 +1,44 @@
-document.addEventListener("DOMContentLoaded", () => {
-    let user = JSON.parse(localStorage.getItem("loggedInUser"));
-    
-    if (!user) {
+const API_URL = "https://userinfo-4b8c.restdb.io/rest/userinfo";
+const API_KEY = "86732fdabf20175fb904e6d9adb6e191f67f9";
+
+document.addEventListener("DOMContentLoaded", async () => {
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    if (!loggedInUser) {
         window.location.href = "login.html"; // Redirect to login if not logged in
     } else {
-        loadUserProfile();
-        loadProducts();
+        await loadUserProfile();
         setupLogoutButton();
     }
 });
 
 // Load the user's profile dynamically
-function loadUserProfile() {
-    let user = JSON.parse(localStorage.getItem("loggedInUser"));
+async function loadUserProfile() {
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    let userId = loggedInUser._id;
 
-    if (user) {
-        document.getElementById("profile-name").innerText = user.name;
-        document.getElementById("profile-email").innerText = user.email;
-    } else {
-        document.getElementById("profile-name").innerText = "Guest";
-        document.getElementById("profile-email").innerText = "guest@example.com";
-    }
-}
-
-// Load products dynamically
-function loadProducts() {
-    let products = JSON.parse(localStorage.getItem("userProducts")) || [];
-    let productContainer = document.getElementById("product-list");
-
-    productContainer.innerHTML = ""; // Clear the container
-
-    if (products.length === 0) {
-        productContainer.innerHTML = "<p>No products added yet.</p>";
-    } else {
-        products.forEach(product => {
-            let productElement = document.createElement("div");
-            productElement.classList.add("product-item");
-            productElement.innerHTML = `
-                <img src="${product.image}" alt="${product.name}">
-                <p>${product.name}</p>
-                <span>$${product.price}</span>
-            `;
-            productContainer.appendChild(productElement);
+    try {
+        let response = await fetch(`${API_URL}/${userId}`, {
+            method: "GET",
+            headers: {
+                "x-apikey": API_KEY,
+                "Content-Type": "application/json"
+            }
         });
+
+        let userData = await response.json();
+
+        document.getElementById("profile-name").innerText = userData.name;
+        document.getElementById("profile-email").innerText = userData.email;
+    } catch (error) {
+        console.error("Error fetching user profile:", error);
     }
 }
 
 // Logout function
 function setupLogoutButton() {
-    const logoutBtn = document.createElement("button");
-    logoutBtn.innerText = "Logout";
-    logoutBtn.id = "logout-btn";
-    logoutBtn.style.cssText = "background-color: red; color: white; border: none; padding: 8px 15px; cursor: pointer; margin-top: 10px;";
-
-    logoutBtn.addEventListener("click", () => {
+    document.getElementById("logout-btn").addEventListener("click", () => {
         localStorage.removeItem("loggedInUser"); // Remove user session
         window.location.href = "login.html"; // Redirect to login page
     });
-
-    document.querySelector(".profile-text").appendChild(logoutBtn);
 }
