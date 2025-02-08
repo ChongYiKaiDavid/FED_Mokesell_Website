@@ -144,3 +144,70 @@ button:hover {
     margin-top: 10px;
     font-weight: bold;
 }
+/* Leaderboard Section */
+/* Center the leaderboard */
+.leaderboard {
+    margin: 50px auto;
+    padding: 20px;
+    background: #222;
+    color: white;
+    border-radius: 10px;
+    width: 50%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Make leaderboard list look better */
+.leaderboard ol {
+    list-style: none;
+    padding: 0;
+    width: 80%;
+}
+
+.leaderboard li {
+    background: #333;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+}
+
+.rank {
+    font-weight: bold;
+    color: #f0a500;
+    font-size: 18px;
+}
+
+.player-name {
+    flex-grow: 1;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.player-score {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff4b4b;
+}
+
+.leaderboard button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0a500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.leaderboard button:hover {
+    background-color: #c98b00;
+}
+

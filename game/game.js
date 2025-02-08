@@ -1,6 +1,10 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const startGameBtn = document.getElementById("startGameBtn");
+const leaderboardList = document.getElementById("leaderboard-list");
+
+const API_URL = "https://davidchong-6ae9.restdb.io/rest/leaderboard ";
+const API_KEY = "67a6f075cab64154577265ac";
 
 canvas.width = 400;
 canvas.height = 400;
@@ -19,17 +23,18 @@ document.addEventListener("keydown", changeDirection);
 function startGame() {
     if (!gameRunning) {
         gameRunning = true;
-        startGameBtn.style.display = "none"; // Hide button when game starts
+        startGameBtn.style.display = "none";
         gameLoop();
     }
 }
 
-// Main Game Loop (Runs only if gameRunning is true)
+// Main Game Loop
 function gameLoop() {
     if (!gameRunning) return;
 
     if (checkCollision()) {
         alert("Game Over! Your score: " + score);
+        saveScore(score);
         restartGame();
         return;
     }
@@ -61,8 +66,7 @@ function moveSnake() {
 
 // Change Direction
 function changeDirection(event) {
-    if (!gameRunning) return; // Prevent movement before game starts
-
+    if (!gameRunning) return;
     if (event.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
     if (event.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
     if (event.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
@@ -80,15 +84,10 @@ function generateFood() {
 // Check Collision with Walls or Itself
 function checkCollision() {
     let head = snake[0];
-
-    if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
-        return true;
-    }
-
+    if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) return true;
     for (let i = 1; i < snake.length; i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) return true;
     }
-
     return false;
 }
 
@@ -104,7 +103,7 @@ function drawGame() {
     snake.forEach((segment) => ctx.fillRect(segment.x, segment.y, box, box));
 }
 
-// Restart Game (Resets Everything)
+// Restart Game
 function restartGame() {
     gameRunning = false;
     snake = [{ x: 200, y: 200 }];
@@ -112,9 +111,47 @@ function restartGame() {
     food = generateFood();
     score = 0;
     document.getElementById("score").innerText = score;
-    startGameBtn.style.display = "block"; // Show start button again
+    startGameBtn.style.display = "block";
+    loadLeaderboard();
+}
+
+// Save Score to RestDB.io
+async function saveScore(score) {
+    const playerName = prompt("Enter your name:", "Player");
+    if (!playerName) return;
+    
+    const data = {
+        name: playerName,
+        score: score
+    };
+    
+    await fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "x-apikey": API_KEY
+        },
+        body: JSON.stringify(data)
+    });
+    loadLeaderboard();
+}
+
+// Load Leaderboard from RestDB.io
+async function loadLeaderboard() {
+    const response = await fetch(API_URL + "?sort=score&dir=-1&max=5", {
+        headers: { "x-apikey": API_KEY }
+    });
+    const scores = await response.json();
+    leaderboardList.innerHTML = "";
+    scores.forEach((entry) => {
+        const li = document.createElement("li");
+        li.textContent = `${entry.name}: ${entry.score}`;
+        leaderboardList.appendChild(li);
+    });
 }
 
 // Event Listener for Start Game Button
 startGameBtn.addEventListener("click", startGame);
 
+// Load leaderboard on page load
+document.addEventListener("DOMContentLoaded", loadLeaderboard);
