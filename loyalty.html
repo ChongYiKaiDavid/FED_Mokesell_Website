@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loyalty Rewards | MokeSell</title>
+    <link rel="stylesheet" href="loyalty.css">
+</head>
+<body>
+    <header>
+        <h1>MokeSell Loyalty Rewards</h1>
+        <p>Earn points and redeem exclusive discounts & store credits!</p>
+    </header>
+
+    <main>
+        <section class="user-info">
+            <h2>Welcome, <span id="username">Guest</span>!</h2>
+            <p>Your Loyalty Points: <strong id="user-points">0</strong></p>
+        </section>
+
+        <section class="rewards">
+            <h2>Claim Your Rewards</h2>
+            <div class="reward-list">
+                <div class="reward-item">
+                    <h3>$5 Store Credit</h3>
+                    <p>Cost: 100 Points</p>
+                    <button onclick="redeemReward(100, 'Store Credit: $5')">Redeem</button>
+                </div>
+                <div class="reward-item">
+                    <h3>$10 Store Credit</h3>
+                    <p>Cost: 200 Points</p>
+                    <button onclick="redeemReward(200, 'Store Credit: $10')">Redeem</button>
+                </div>
+                <div class="reward-item">
+                    <h3>10% Discount Voucher</h3>
+                    <p>Cost: 150 Points</p>
+                    <button onclick="redeemReward(150, '10% Off Voucher')">Redeem</button>
+                </div>
+                <div class="reward-item">
+                    <h3>Free Shipping</h3>
+                    <p>Cost: 300 Points</p>
+                    <button onclick="redeemReward(300, 'Free Shipping')">Redeem</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="redeemed">
+            <h2>Your Redeemed Rewards</h2>
+            <ul id="redeemed-list">
+                <p>No rewards claimed yet.</p>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <button onclick="window.location.href='index.html'">Back to Home</button>
+    </footer>
+
+    <script src="loyalty.js"></script>
+</body>
+</html>
