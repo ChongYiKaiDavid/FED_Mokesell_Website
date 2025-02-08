@@ -1035,3 +1035,144 @@ h1 {
   font-size: 18px;
 }
 
+/* clothings banner */
+.clothing-banner {
+  width: 90%;
+  max-width: 1200px;
+  margin: 50px auto;
+  position: relative; /* Allows text to overlay the image */
+  border-radius: 15px;
+  overflow: hidden; /* Ensures no content spills outside */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.clothing-banner-image img {
+  width: 100%;
+  display: block;
+}
+
+.clothing-banner-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centers text */
+  text-align: center;
+  color: rgb(0, 0, 0);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.clothing-banner-text h1 span {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.clothing-banner-text p {
+  font-size: 18px;
+}
+/* individual clothing product page */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #333;
+  color: white;
+}
+
+.nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.nav ul li {
+  margin: 0 15px;
+}
+
+.nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.clothing-product {
+  display: flex;
+  max-width: 900px;
+  margin: 50px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+.clothing-image {
+  flex: 1; /* Takes 50% of the container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clothing-image img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 10px;
+}
+
+.clothing-details {
+  flex: 1; /* Takes 50% of the container */
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.clothing-details h2 {
+  font-size: 24px;
+}
+
+.price {
+  font-size: 22px;
+  color: #27ae60;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.description {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+}
+
+.add-to-cart {
+  background-color: #27ae60;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.add-to-cart:hover {
+  background-color: #219150;
+}
