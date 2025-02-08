@@ -101,3 +101,19 @@ document.getElementById("searchButton").addEventListener("click", function () {
       }
   });
 });
+
+document.getElementById("pay-button").addEventListener("click", function() {
+    const email = document.getElementById("email").value;
+    const cardNumber = document.getElementById("card-number").value;
+    const expiry = document.getElementById("expiry").value;
+    const cvc = document.getElementById("cvc").value;
+    const cardholder = document.getElementById("cardholder").value;
+    const country = document.getElementById("country").value;
+
+    if (!email || !cardNumber || !expiry || !cvc || !cardholder) {
+        alert("Please fill out all fields correctly.");
+        return;
+    }
+
+    alert("Payment successful for " + cardholder + " from " + country);
+});
