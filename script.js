@@ -110,7 +110,23 @@ const productPages = {
     "Miss Dior Parfum Roller-Pearl": "perfume-product3.html",
     "Gris Dior": "perfume-product4.html",
     "J'adore l'Or": "perfume-product5.html",
-    "Ambre Nuit": "perfume-product6.html"
+    "Ambre Nuit": "perfume-product6.html",
+      "[ENHYPEN] 4th ENniversary Strap": "productsdetails1.html",
+      "[ENHYPEN] 4th ENniversary Instant Photo Garland": "productsdetails2.html",
+      "[ENHYPEN] 4th ENniversary Photo Lamp": "productsdetails3.html",
+      "[ATEEZ] 2025 Season's Greetings": "productsdetails4.html",
+      "[SEVENTEEN] 2025 Season's Greetings": "productsdetails5.html",
+      "[BTS] Lightstick Version 3": "productsdetails6.html",
+      "UGREEN Flat Cat7 Ethernet Cable RJ45": "productsdetails7.html",
+      "[BLACKPINK] Born Pink Hoodie": "productsdetails8.html",
+      "Biofinest Vitamin K2 (MK7) with D3 Supplement": "productsdetails9.html",
+      "Spigen Ultra Hybrid MagFit Case for Samsung Galaxy S25 Ultra": "productsdetails10.html",
+      "[ATEEZ] Zero: Fever Album Vol. 3": "productsdetails11.html",
+      "[NCT] WayV Logo Keychain": "productsdetails12.html",
+      "[TXT] MOA Diary Notebook": "productsdetails13.html",
+      "[KIRONA SCENT] Essential Oil Body Wash": "productsdetails14.html",
+      "[IVE] Love Dive Mini Album": "productsdetails15.html",
+  
     // Add more products and their corresponding HTML files here
 };
 
@@ -174,3 +190,77 @@ document.getElementById("pay-button").addEventListener("click", function() {
 
     alert("Payment successful for " + cardholder + " from " + country);
 });
+
+// add to cart
+// Initialize the cart in localStorage if it doesn't already exist
+if (!localStorage.getItem('cart')) {
+  localStorage.setItem('cart', JSON.stringify([]));
+}
+
+// Function to update the cart icon count in the header
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem('cart'));
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+  document.getElementById("cart-count").innerText = cartCount;
+}
+
+// Function to render cart items and total price in the cart page
+function renderCartItems() {
+  const cart = JSON.parse(localStorage.getItem('cart'));
+  const cartItemsContainer = document.getElementById('cart-items');
+  const totalPriceElement = document.getElementById('total-price');
+  
+  // Clear current cart items
+  cartItemsContainer.innerHTML = '';
+
+  // Calculate total price
+  let totalPrice = 0;
+
+  // Loop through cart items and display them
+  cart.forEach(item => {
+      const cartItem = document.createElement('div');
+      cartItem.classList.add('cart-item');
+      cartItem.innerHTML = `
+          <span>${item.name}</span>
+          <span>Quantity: ${item.quantity}</span>
+          <span>$${(item.price * item.quantity).toFixed(2)}</span>
+      `;
+      cartItemsContainer.appendChild(cartItem);
+
+      // Add to total price
+      totalPrice += item.price * item.quantity;
+  });
+
+  // Update the total price
+  totalPriceElement.innerText = totalPrice.toFixed(2);
+}
+
+// Function to add product to the cart
+function addToCart(productName, price) {
+  const cart = JSON.parse(localStorage.getItem('cart'));
+
+  // Check if the product is already in the cart
+  const existingProduct = cart.find(item => item.name === productName);
+  
+  if (existingProduct) {
+      // If the product is already in the cart, increase the quantity
+      existingProduct.quantity += 1;
+  } else {
+      // If the product is not in the cart, add it
+      const newProduct = { name: productName, price: price, quantity: 1 };
+      cart.push(newProduct);
+  }
+
+  // Save the updated cart to localStorage
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // Update cart count in the header
+  updateCartCount();
+}
+
+// Call the function to update the cart count when the page loads
+updateCartCount();
+
+// Call the function to render the cart items when the page loads
+renderCartItems();
+
