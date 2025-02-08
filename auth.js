@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("login-form");
     const signupForm = document.getElementById("signup-form");
 
-    // Fake login (Stores in Local Storage)
+    // Login Function
     if (loginForm) {
         loginForm.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -13,14 +13,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (storedUser && storedUser.password === password) {
                 alert("Login successful!");
-                window.location.href = "index.html"; // Redirect to home page
+                localStorage.setItem("loggedInUser", email); // Store login state
+                window.location.href = "index.html"; // Redirect to homepage
             } else {
                 alert("Invalid email or password.");
             }
         });
     }
 
-    // Fake signup (Stores user in Local Storage)
+    // Signup Function (Save User)
     if (signupForm) {
         signupForm.addEventListener("submit", function (e) {
             e.preventDefault();

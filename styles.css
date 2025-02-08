@@ -1023,77 +1023,59 @@ h1 {
 }
 
 /* Banner Section Styling */
+/* Banner Section */
 .banner-section {
-  position: relative;
   width: 100%;
-  height: auto;
-  background-color: #f8f9fa; /* Fallback background color */
+  overflow: hidden;
 }
 
-/* Ensure Banner Image is Visible */
+.banner-container {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
 .banner-image {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  display: block;
 }
 
-/* Fix Lottie Animation Placement */
-.lottie-container {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
-  width: 250px;
-  height: 250px;
-}
-
-/* Fix Text Placement */
-.banner-text {
+.banner-content {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: #fff;
   text-align: center;
-  color: white;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
 }
 
-/* Fix Button Styling */
+.banner-text h2 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
 .banner-btn {
   display: inline-block;
-  margin-top: 15px;
-  padding: 12px 25px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: white;
-  background: linear-gradient(135deg, #ff6b6b, #ff4757);
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #ff6600;
+  color: #fff;
   text-decoration: none;
-  border-radius: 10px;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease-in-out, background 0.3s ease-in-out;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
 .banner-btn:hover {
-  background: linear-gradient(135deg, #ff4757, #e84393);
-  transform: scale(1.1);
+  background-color: #e65c00;
 }
 
-
-/* GIF Animation Styling */
-.gif-container {
-  position: absolute;
-  top: 50%;
-  left: 5%; /* Adjust left position */
-  transform: translateY(-50%);
-}
-
-.gif-animation {
-  width: 120px; /* Adjust size */
+.banner-gif img {
+  width: 150px;
   height: auto;
-}
-.gif-animation:hover {
-  transform: scale(1.1);
-  transition: transform 0.3s ease-in-out;
+  border-radius: 10px;
+  margin-top: 15px;
 }
