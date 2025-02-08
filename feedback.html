@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback & Support | MokeSell</title>
+    <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <h1 class="logo">MokeSell</h1>
+    </header>
+
+    <!-- Banner Section with Fun Images -->
+    <section class="banner">
+        <h2>We Value Your Feedback! 😊</h2>
+        <img src="https://media.giphy.com/media/3ohs4BSacFKI7A717y/giphy.gif" alt="Feedback GIF">
+        <img src="https://cdn-icons-png.flaticon.com/512/4658/4658943.png" alt="Feedback Icon">
+    </section>
+
+    <!-- Main Feedback Container -->
+    <div class="container">
+        <h2>Submit Feedback</h2>
+
+        <label for="category">Category:</label>
+        <select id="category">
+            <option value="bug">🐞 Bug Report</option>
+            <option value="feature">✨ Feature Request</option>
+            <option value="support">📞 General Support</option>
+        </select>
+
+        <label for="feedback-text">Describe the Issue:</label>
+        <textarea id="feedback-text" placeholder="Enter your feedback here..." rows="4"></textarea>
+
+        <button id="submit-feedback">Submit Feedback</button>
+
+        <h2>Assigned Feedback</h2>
+        <div id="assigned-feedback"></div>
+    </div>
+
+    <!-- Back to Home Button at the Bottom -->
+    <div class="footer">
+        <button class="home-button" onclick="window.location.href='index.html'">🏠 Go Back to Home</button>
+    </div>
+
+    <script src="feedback.js"></script>
+</body>
+</html>
