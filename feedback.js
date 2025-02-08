@@ -1,5 +1,5 @@
-const API_URL = "https://userinfo-4b8c.restdb.io/rest/feedback";
-const API_KEY = "86732fdabf20175fb904e6d9adb6e191f67f9";
+const API_URL = "https://mokesell-d690.restdb.io/rest/userinfo"; // Updated RESTdb URL
+const API_KEY = "67a777184d8744758f828036"; // Your API Key
 
 // Get logged-in user
 let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -11,7 +11,7 @@ if (!loggedInUser) {
 let userEmail = loggedInUser.email;
 let userId = loggedInUser._id;
 
-// Function to Submit Feedback
+// ✅ Submit Feedback to RESTdb
 document.getElementById("submit-feedback").addEventListener("click", async function () {
     let category = document.getElementById("category").value;
     let feedbackText = document.getElementById("feedback-text").value;
@@ -52,7 +52,7 @@ document.getElementById("submit-feedback").addEventListener("click", async funct
     }
 });
 
-// Function to Load Feedback
+// ✅ Load Feedback from RESTdb
 async function loadFeedback() {
     try {
         let response = await fetch(`${API_URL}?q={"user": "${userEmail}"}`, {
@@ -78,6 +78,8 @@ async function loadFeedback() {
                     <p><strong>Feedback:</strong> ${feedback.feedback}</p>
                     <p><strong>Status:</strong> ${feedback.status}</p>
                     <p><strong>Assigned Staff:</strong> ${feedback.supportStaff}</p>
+                    <p><strong>Rating:</strong> ${feedback.rating !== null ? feedback.rating : "Not Rated Yet"}</p>
+                    ${feedback.status === "Resolved" ? `<button onclick="rateFeedback('${feedback._id}')">Rate Support</button>` : ""}
                 `;
                 feedbackContainer.appendChild(feedbackItem);
             });
@@ -87,5 +89,36 @@ async function loadFeedback() {
     }
 }
 
-// Load Feedback on Page Load
+// ✅ Rate Feedback (Only If Resolved)
+async function rateFeedback(feedbackId) {
+    let rating = prompt("Rate the support (1-5):");
+    rating = parseInt(rating);
+
+    if (isNaN(rating) || rating < 1 || rating > 5) {
+        alert("Please enter a valid rating between 1 and 5.");
+        return;
+    }
+
+    try {
+        let response = await fetch(`${API_URL}/${feedbackId}`, {
+            method: "PATCH",
+            headers: {
+                "x-apikey": API_KEY,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ rating: rating })
+        });
+
+        if (response.ok) {
+            alert("Thank you for your feedback!");
+            loadFeedback();
+        } else {
+            alert("Failed to submit rating.");
+        }
+    } catch (error) {
+        console.error("Error submitting rating:", error);
+    }
+}
+
+// ✅ Load Feedback on Page Load
 document.addEventListener("DOMContentLoaded", loadFeedback);
