@@ -1274,3 +1274,63 @@ select {
 .arrow:hover {
   background: rgba(0, 0, 0, 0.8);
 }
+
+/* reviews page */
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.image {
+  text-align: center;
+  margin: 10px 0;
+}
+.image img {
+  width: 100px;
+  height: auto;
+}
+.stars {
+  color: gray;
+  font-size: 20px;
+  cursor: pointer;
+}
+.star {
+  display: inline-block;
+  transition: color 0.2s;
+}
+.star.selected {
+  color: gold;
+}
+.amazing {
+  color: orange;
+  font-weight: bold;
+  margin-left: 10px;
+}
+textarea {
+  width: 100%;
+  height: 80px;
+  margin: 5px 0;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.submit-btn {
+  background: black;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+}

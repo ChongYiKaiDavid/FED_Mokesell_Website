@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Product</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<header class="header">
+    <div class="logo">
+        <h1>MokeSell</h1>
+    </div>
+    
+    <nav class="nav">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a id="type-link" href="#">Products</a></li>
+            <li><a id="blog-link" href="#">Blog</a></li>
+            <li><a id="contact-link" href="#contact-section">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="header-icons">
+        <a href="cart.html" id="cart-link"><i class="fas fa-shopping-cart"></i></a>
+        <a href="profile.html" id="profile-link"><i class="fas fa-user"></i></a>
+    </div>
+</header>
+<body>
+    <div class="container">
+        <div class="title">Rate product</div>
+        <div class="stars" id="star-rating">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+            <span class="amazing">Amazing</span>
+        </div>
+        <div>
+            <label>Quality:</label>
+            <textarea placeholder="Write about this aspect"></textarea>
+        </div>
+        <div>
+            <label>Appearance:</label>
+            <textarea placeholder="Write about this aspect"></textarea>
+        </div>
+        <div>
+            <textarea placeholder="Share more about the product"></textarea>
+        </div>
+        <button class="submit-btn">Submit →</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
