@@ -105,6 +105,12 @@ const productPages = {
     "DeFacto Ecru Shirt" : "clothes-product4.html",
     "Mango Structured Suit Jacket" : "clothes-product5.html",
     "calvin Klein--Monologo Crop Polo Shirt" : "clothes-product6.html",
+    "Sauvage Eau de Parfum": "perfume-product1.html",
+    "Bois Talisman": "perfume-product2.html",
+    "Miss Dior Parfum Roller-Pearl": "perfume-product3.html",
+    "Gris Dior": "perfume-product4.html",
+    "J'adore l'Or": "perfume-product5.html",
+    "Ambre Nuit": "perfume-product6.html"
     // Add more products and their corresponding HTML files here
 };
 
