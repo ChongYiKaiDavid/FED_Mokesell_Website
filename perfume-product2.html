@@ -3,42 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>belif Youth Creator – Age Knockdown Eye Serum</title>
+    <title>Shopping Cart</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-</head>
-<body>
+    <script src="cart.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header class="header">
         <div class="logo">
             <h1>MokeSell</h1>
         </div>
-        
         <nav class="nav">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a id="type-link" href="#">Products</a></li>
-                <li><a id="blog-link" href="#">Blog</a></li>
-                <li><a id="contact-link" href="#contact-section">Contact</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a></li>
             </ul>
         </nav>
-        <div class="header-icons">
-            <a href="cart.html" id="cart-link"><i class="fas fa-shopping-cart"></i></a>
-            <a href="profile.html" id="profile-link"><i class="fas fa-user"></i></a>
-        </div>
     </header>
 
-    <div class="product-detail">
-        <img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwfe0a461c/Y0998027/Y0998027_C099800296_E01_ZHC.jpg?sw=1800&sh=1200" alt="Bois Talisman">
-        <div class="product-info">
-            <h2>Bois Talisman</h2>
-            <p>Unisex Eau de Parfum - Woody and Vanilla Notes</p>
-            <span class="price">$480.00</span>
-            <button class="add-to-cart">Add to Cart</button>
+    <main>
+        <div class="product-detail">
+            <img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwfe0a461c/Y0998027/Y0998027_C099800296_E01_ZHC.jpg?sw=1800&sh=1200" alt="Sauvage Eau de Parfum">
+            <div class="product-info">
+                <h2>Bois Talisman</h2>
+                <p>Unisex Eau de Parfum - Woody and Vanilla Notes</p>
+                <span class="price">$480.00</span>
+                <button class="add-to-cart" onclick="addToCart('Bois Talisman', 480.00)">Add to Cart</button>
+                <button class="review-button" onclick="location.href='reviews.html'">Leave a review!</button>
+            </div>
         </div>
-    </div>
-    
+    </main>
 </body>
 </html>

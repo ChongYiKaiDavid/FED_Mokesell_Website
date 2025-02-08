@@ -16,7 +16,7 @@
         <nav class="nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#">Products</a></li>
+                <li><a href="products.html">Products</a></li>
                 <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a></li>
             </ul>
         </nav>
@@ -29,14 +29,17 @@
             <h3>Total: $<span id="total-price">0.00</span></h3>
             <button id="checkout-btn" class="px-6 py-3 text-white bg-blue-500 rounded-lg shadow hover:bg-blue-600 transition">
                 Checkout
+                <script>
+                    document.getElementById("checkout-btn").addEventListener("click", function() {
+                        // Clear cart from localStorage when proceeding to checkout
+                        localStorage.removeItem('cart');
+                        
+                        // Redirect to the payment page
+                        window.location.href = "payment.html";
+                    });
+                </script>
+                
             </button>
-            
-            <script>
-                document.getElementById("checkout-btn").addEventListener("click", function() {
-                    window.location.href = "payment.html";
-                });
-            </script>
-            
         </div>
     </main>
 </body>

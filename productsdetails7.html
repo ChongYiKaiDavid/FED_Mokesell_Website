@@ -13,6 +13,7 @@
     <script src="overlord.js"></script>
     <script src="https://kit.fontawesome.com/15369d822f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
+    <script src="cart.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -21,18 +22,18 @@
         </div>
         <nav class="nav">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a id="type-link" href="#">Products</a></li>
-                <li><a id="blog-link" href="#">Blog</a></li>
-                <li><a id="contact-link" href="#contact-section">Contact</a></li>
-            </ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about-section">About</a></li>
+                <li><a id="type-link" href="products.html">Products</a></li>
+                <li><a id="blog-link" href="index.html#news-section">Blog</a></li>
+                <li><a id="contact-link" href="index.html#contact-section">Contact</a></li>
+            </ul>
         </nav>
         <div class="header-icons">
-            <a href="cart.html" id="cart-link"><i class="fas fa-shopping-cart"></i></a>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a></li>
             <a href="profile.html" id="profile-link"><i class="fas fa-user"></i></a>
         </div>
-    </header>
+    </header>
     <!-- Product Details Section -->
     <section class="product-details">
         <div class="product-container">
@@ -43,7 +44,8 @@
                 <h1>UGREEN Flat Cat7 Ethernet Cable RJ45</h1>
                 <p class="price">$5.00 SGD</p>
                 <p>While stocks last!</p>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('UGREEN Flat Cat7 Ethernet Cable RJ45', 5.00)">Add to Cart</button>
+                <button class="review-button" onclick="location.href='reviews.html'">Leave a review!</button>
                 <p class="store-info">
                     Pickup available at Retail Store: Grantral Mall @ Macpherson #01-15 <br>
                     Usually ready in 5+ days.

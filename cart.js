@@ -51,3 +51,69 @@ function displayCart(cart) {
         });
     }
 }
+
+// Initialize cart if it doesn't exist
+if (!localStorage.getItem('cart')) {
+    localStorage.setItem('cart', JSON.stringify([]));
+}
+
+// Function to update the cart icon count in the header
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById("cart-count").innerText = cartCount;
+}
+
+// Function to add items to the cart
+function addToCart(productName, price) {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    const existingProduct = cart.find(item => item.name === productName);
+
+    if (existingProduct) {
+        existingProduct.quantity += 1; // Increase quantity if product exists
+    } else {
+        cart.push({ name: productName, price: price, quantity: 1 }); // Add new product if not in cart
+    }
+
+    // Save updated cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Update cart count in the header
+    updateCartCount();
+
+    // Display alert or log a message for testing
+    console.log('Item added to cart:', productName);
+}
+
+// Function to render cart items on the cart page
+function renderCartItems() {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    const cartItemsContainer = document.getElementById('cart-items');
+    const totalPriceElement = document.getElementById('total-price');
+
+    // Clear existing cart items
+    cartItemsContainer.innerHTML = '';
+
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+            <span>${item.name}</span>
+            <span>Quantity: ${item.quantity}</span>
+            <span>$${(item.price * item.quantity).toFixed(2)}</span>
+        `;
+        cartItemsContainer.appendChild(cartItem);
+
+        totalPrice += item.price * item.quantity;
+    });
+
+    totalPriceElement.innerText = totalPrice.toFixed(2);
+}
+
+// Call the function to update cart count when the page loads
+updateCartCount();
+
+// Call the function to render cart items when the page loads
+renderCartItems();
