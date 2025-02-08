@@ -87,17 +87,69 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //search bar
-document.getElementById("searchButton").addEventListener("click", function () {
-  let query = document.getElementById("searchInput").value.toLowerCase();
-  let products = document.querySelectorAll(".product-card, .product-card2");
+// Get references to the search input and button
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
 
-  products.forEach((product) => {
-      let productName = product.getAttribute("data-name");
-      
-      if (productName.includes(query)) {
-          product.style.display = "block"; // Show matching products
-      } else {
-          product.style.display = "none"; // Hide non-matching products
-      }
-  });
+// Map of product names to their corresponding HTML filenames
+const productPages = {
+    "belif youth creator age knockdown eye serum": "skincare-product1.html",
+    "the therapy vegan blending serum": "skincare-product2.html",
+    "the therapy vegan moisture blending cream": "skincare-product3.html",
+    "belif prime infusion repair essence & cream": "skincare-product4.html",
+    "thefaceshop the therapy vegan moisturizing sun serum": "skincare-product5.html",
+    "thefaceshop the solution brightening face mask": "skincare-product6.html",
+    "Geared Pants" : "clothes-product1.html",
+    "Rollerblade Logo T-Shirt" : "clothes-product2.html",
+    "Relaxed Pinstripe Shirt" : "clothes-product3.html",
+    "DeFacto Ecru Shirt" : "clothes-product4.html",
+    "Mango Structured Suit Jacket" : "clothes-product5.html",
+    "calvin Klein--Monologo Crop Polo Shirt" : "clothes-product6.html",
+    // Add more products and their corresponding HTML files here
+};
+
+// Add event listener for button click
+searchButton.addEventListener('click', function() {
+    searchAndRedirect(searchInput.value);
 });
+
+// Optionally, add event listener for Enter key press
+searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        searchAndRedirect(searchInput.value);
+    }
+});
+
+// Function to perform the search and redirection (with case-insensitive match)
+function searchAndRedirect(query) {
+    if (query.trim() !== '') {
+        // Convert the query to lowercase
+        const queryLowerCase = query.toLowerCase();
+
+        // Log the query for debugging
+        console.log('Search query:', queryLowerCase);
+
+        // Find the product page using the search query (case-insensitive and partial match)
+        const productPage = Object.keys(productPages).find(productName => 
+            productName.toLowerCase().includes(queryLowerCase)
+        );
+
+        // Log the result of the search to check the matching product page
+        console.log('Matching product page:', productPage);
+
+        if (productPage) {
+            // Redirect to the product's HTML page
+            window.location.href = productPages[productPage];
+        } else {
+            console.log('No matching product found');
+            // Optionally, show an alert or a message if no match is found
+            alert('No matching product found');
+        }
+    }
+}
+
+
+
+
+
+
