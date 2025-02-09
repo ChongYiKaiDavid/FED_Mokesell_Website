@@ -170,9 +170,85 @@ function searchAndRedirect(query) {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const reviewsContainer = document.getElementById("reviews-container");
+    const stars = document.querySelectorAll(".star");
+    const submitBtn = document.querySelector(".submit-btn");
+    let selectedRating = 0;
 
+    // Handle star rating selection
+    document.addEventListener("DOMContentLoaded", function () {
+        const stars = document.querySelectorAll(".star");
+        let selectedRating = 0;
+    
+        stars.forEach(star => {
+            star.addEventListener("click", function () {
+                selectedRating = parseInt(this.getAttribute("data-value"));
+    
+                // Remove previous selection
+                stars.forEach(s => s.classList.remove("selected"));
+    
+                // Highlight selected stars
+                for (let i = 0; i < selectedRating; i++) {
+                    stars[i].classList.add("selected");
+                }
+    
+                console.log(`⭐ Selected Rating: ${selectedRating}`);
+            });
+        });
+    });
+    
+    // Retrieve reviews from LocalStorage
+    let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
+    if (reviews.length === 0) {
+        reviewsContainer.innerHTML = "<p>No reviews yet. Be the first to review!</p>";
+        return;
+    }
 
+    reviews.forEach(review => {
+        const reviewElement = document.createElement("div");
+        reviewElement.classList.add("review-item");
+        reviewElement.innerHTML = `
+            <p><strong>Rating:</strong> ${"⭐".repeat(review.rating)}</p>
+            <p><strong>Quality:</strong> ${review.quality}</p>
+            <p><strong>Appearance:</strong> ${review.appearance}</p>
+            <p><strong>General:</strong> ${review.general}</p>
+            <p><em>Reviewed on: ${review.date}</em></p>
+            <hr>
+        `;
+        reviewsContainer.appendChild(reviewElement);
+    });
+
+    // Submit review button functionality
+    if (submitBtn) {
+        submitBtn.addEventListener("click", function () {
+            const qualityReview = document.getElementById("quality-review").value.trim();
+            const appearanceReview = document.getElementById("appearance-review").value.trim();
+            const generalReview = document.getElementById("general-review").value.trim();
+
+            if (selectedRating === 0 || !qualityReview || !appearanceReview || !generalReview) {
+                alert("Please fill in all fields and select a rating.");
+                return;
+            }
+
+            const review = {
+                rating: selectedRating,
+                quality: qualityReview,
+                appearance: appearanceReview,
+                general: generalReview,
+                date: new Date().toLocaleDateString()
+            };
+
+            let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+            reviews.push(review);
+            localStorage.setItem("reviews", JSON.stringify(reviews));
+
+            alert("Review submitted successfully!");
+            window.location.href = "showreviews.html";
+        });
+    }
+});
 
 
 document.getElementById("pay-button").addEventListener("click", function() {

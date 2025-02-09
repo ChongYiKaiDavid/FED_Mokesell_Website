@@ -27,24 +27,36 @@
             <a href="profile.html" id="profile-link"><i class="fas fa-user"></i></a>
         </div>
     </header>
-    <body>
-        <div class="container">
-            <h2>Add Balance</h2>
     
-            <!-- Display User's Current Balance -->
-            <p class="label">Your Total Balance:</p>
-            <p id="balance" class="balance-amount">$0.00</p>
-    
-            <!-- Input Amount to Add -->
-            <div class="input-container">
-                <label for="amount">Enter Amount ($)</label>
-                <input type="number" id="amount" placeholder="Enter amount" min="1">
-            </div>
-    
-            <!-- Proceed to Payment Button -->
-            <button id="proceed-btn">Proceed to Payment</button>
+    <div class="container">
+        <h2>Add Balance</h2>
+
+        <p class="label">Your Total Balance:</p>
+        <p id="balance" class="balance-amount">$0.00</p>
+
+        <div class="input-container">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter your full name">
         </div>
-    
-        <script src="addbalance.js"></script>
-    </body>
-    </html>
+
+        <div class="input-container">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email">
+        </div>
+
+        <div class="input-container">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password">
+        </div>
+
+        <div class="input-container">
+            <label for="amount">Enter Amount ($)</label>
+            <input type="number" id="amount" placeholder="Enter amount" min="1">
+        </div>
+
+        <button id="proceed-btn">Proceed to Payment</button>
+    </div>
+
+    <script src="addbalance.js"></script>
+</body>
+</html>
