@@ -14,3 +14,8 @@ Quality and reliability are integral to MokeSell’s success. System performance
 Looking forward, MokeSell is dedicated to ongoing innovation and refinement. Features of the social commerce environment, including the ability to "follow" favourite sellers, and "build" a "shared wishlist", will provide a sense of community and concurrency between users. By the sellers, it is clear to look forward to more sophisticated analytics-converting rates into buyers' information, looking at the demographics of customers that have just bought, and maps of product looks in which specific elements or decisions of a decision tree lead to the top entry categories-and helping them optimize their strategies to reach the top-of-mind decisions of the best demographic segments.
 
 MokeSell is more than just a marketplace—it’s a platform that prioritizes community, innovation, and user satisfaction. Through the integration of advanced technology and a thorough understanding of user needs, MokeSell has become a frontrunner in the online marketplace segment. Because of their focus on building trust, simplifying and delivering value, the digital economy provides a domain where both buyers and sellers can flourish and compete in an ever-changing and dynamic marketplace.
+
+Design process:
+https://www.figma.com/design/1X3vk0ZMaon3NJUjoOTVyR/Mokesell?node-id=1-2&t=uZ2hwTxa5PCVvEZE-1
+We chose a more sleek design as explained in our video walk through. As we think other eccormerce websites are too cluttered and is not as user friendly as ours.
+
