@@ -1,31 +1,45 @@
 document.addEventListener("DOMContentLoaded", function () {
-    updateCartCount(); // Update cart count in header when page loads
+    updateCartCount();
 
-    if (document.getElementById("cart-items")) {
-        renderCartItems(); // Render cart items if on the cart page
+    const cartItemsContainer = document.getElementById("cart-items");
+    if (cartItemsContainer) {
+        renderCartItems();
     }
 
-    // Handle item removal in the cart
-    document.getElementById("cart-items")?.addEventListener("click", function (event) {
-        if (event.target.tagName === "BUTTON") {
-            let index = event.target.dataset.index;
-            removeFromCart(index);
-        }
-    });
+    const purchasesList = document.getElementById("purchases-list");
+    if (purchasesList) {
+        renderPurchases();
+    }
 
-    // Handle checkout
-    document.getElementById("checkout-btn")?.addEventListener("click", function () {
-        localStorage.removeItem("cart");
-        updateCartCount();
-        window.location.href = "payment.html";
-    });
+    const checkoutBtn = document.getElementById("checkout-btn");
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener("click", function () {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            const purchases = JSON.parse(localStorage.getItem("purchases")) || [];
+            purchases.push(...cart);
+            localStorage.setItem("purchases", JSON.stringify(purchases));
+
+            localStorage.removeItem("cart");
+            updateCartCount();
+
+            window.location.href = "payment.html";
+        });
+    }
 });
 
 // Function to update the cart icon count in the header
 function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
-    document.getElementById("cart-count").innerText = cartCount;
+    const cartCountElement = document.getElementById("cart-count");
+    if (cartCountElement) {
+        cartCountElement.innerText = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+    }
 }
 
 // Function to add items to the cart
@@ -34,15 +48,14 @@ function addToCart(productName, price) {
     let existingProduct = cart.find(item => item.name === productName);
 
     if (existingProduct) {
-        existingProduct.quantity += 1; // Increase quantity if product already exists
+        existingProduct.quantity = (existingProduct.quantity || 1) + 1;
     } else {
-        cart.push({ name: productName, price: price, quantity: 1 }); // Add new product
+        cart.push({ name: productName, price: price, quantity: 1 });
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
-
-    // Update cart if user is on the cart page
+    
     if (document.getElementById("cart-items")) {
         renderCartItems();
     }
@@ -53,20 +66,21 @@ function addToCart(productName, price) {
 // Function to remove items from the cart
 function removeFromCart(index) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.splice(index, 1); // Remove item at specified index
+    cart.splice(index, 1);
     localStorage.setItem("cart", JSON.stringify(cart));
     
     updateCartCount();
     renderCartItems();
 }
 
-// Function to render cart items on the cart page
+// Function to render cart items
 function renderCartItems() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const cartItemsContainer = document.getElementById("cart-items");
     const totalPriceElement = document.getElementById("total-price");
 
-    // Clear existing cart display
+    if (!cartItemsContainer || !totalPriceElement) return;
+
     cartItemsContainer.innerHTML = "";
 
     if (cart.length === 0) {
@@ -92,4 +106,29 @@ function renderCartItems() {
     });
 
     totalPriceElement.innerText = totalPrice.toFixed(2);
+}
+
+// Function to render previous purchases
+function renderPurchases() {
+    const purchases = JSON.parse(localStorage.getItem("purchases")) || [];
+    const purchasesList = document.getElementById("purchases-list");
+
+    if (!purchasesList) return;
+    purchasesList.innerHTML = "";
+
+    if (purchases.length === 0) {
+        purchasesList.innerHTML = "<p>No previous purchases found.</p>";
+        return;
+    }
+
+    purchases.forEach(item => {
+        const purchaseItem = document.createElement("div");
+        purchaseItem.classList.add("cart-item");
+        purchaseItem.innerHTML = `
+            <span>${item.name}</span>
+            <span>Quantity: ${item.quantity}</span>
+            <span>$${(item.price * item.quantity).toFixed(2)}</span>
+        `;
+        purchasesList.appendChild(purchaseItem);
+    });
 }
