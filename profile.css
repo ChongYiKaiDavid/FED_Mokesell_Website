@@ -1,54 +1,90 @@
 /* Import global styles */
 @import url("styles.css");
 
-/* Profile Page Container */
-.profile-container {
-    width: 80%;
-    margin: auto;
-    padding: 20px;
-}
 
-/* Profile Header */
+/* Profile Header - Color Updated */
 .profile-header {
+    background: linear-gradient(135deg, #3498db, #6dd5fa, #ffffff); /* Smooth blue gradient */
+    padding: 40px;
+    border-radius: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #8b5a2b;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
 }
 
-/* Profile Info */
+/* Profile Container */
+.profile-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Info Section */
 .profile-info {
     display: flex;
     align-items: center;
 }
 
-/* Profile Picture */
 .profile-pic {
-    background: #c49a6c; 
-    color: white;
-    font-size: 2rem;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    color: #3498db;
+    font-size: 30px;
+    font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     margin-right: 15px;
-    font-weight: bold;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Profile Text */
 .profile-text h2 {
-    margin: 0;
-    font-size: 1.5rem;
+    font-size: 24px;
+    color: #ffffff;
 }
 
 .profile-text p {
-    margin: 5px 0;
-    font-size: 1rem;
+    font-size: 16px;
+    color: #f8f9fa;
+}
+
+/* Buttons */
+button {
+    margin-top: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    color: white;
+    background-color: #2980b9;
+    border: none;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #1f6692;
+}
+
+/* Profile Actions */
+.profile-actions {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.action {
+    text-align: center;
+}
+
+.action img {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
 }
 
 /* Edit Profile Button */

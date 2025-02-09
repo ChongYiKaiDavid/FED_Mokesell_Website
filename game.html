@@ -5,6 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MokeSell Gamified Shopping</title>
     <link rel="stylesheet" href="game/game.css">
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <style>
+        .game-layout {
+            display: flex;
+            justify-content: space-evenly; /* Ensures proper spacing */
+            align-items: flex-start;
+            max-width: 90%;
+            margin: 40px auto;
+            padding: 20px;
+            gap: 50px;
+        }
+        .instructions {
+            width: 25%;
+            text-align: left;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+        .game-area {
+            width: 50%; /* Expanding the game area */
+            text-align: center;
+        }
+        .animations {
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .animations dotlottie-player {
+            width: 250px;
+            height: 250px;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -28,18 +63,37 @@
     <div class="game-container">
         <h1>🐍 Snake Shopping Game</h1>
         
-        <button id="startGameBtn">Start Game</button>
-        <canvas id="gameCanvas"></canvas>
-        <p>Score: <span id="score">0</span></p>
-        
-        <button onclick="restartGame()">Restart Game</button>
+        <div class="game-layout">
+            <!-- Left: Instructions -->
+            <div class="instructions">
+                <h2>📜 How to Play</h2>
+                <p>1️⃣ Use the arrow keys to control the snake.</p>
+                <p>2️⃣ Eat the red squares to earn points.</p>
+                <p>3️⃣ Avoid hitting the walls or yourself.</p>
+                <p>4️⃣ The game ends when you collide.</p>
+                <p>5️⃣ Earn rewards based on your score!</p>
+            </div>
+
+            <!-- Center: Game Canvas -->
+            <div class="game-area">
+                <button id="startGameBtn">Start Game</button>
+                <canvas id="gameCanvas"></canvas>
+                <p>Score: <span id="score">0</span></p>
+                <button onclick="resetGame()">Restart Game</button>
+            </div>
+
+            <!-- Right: Lottie Animations -->
+            <div class="animations">
+                <dotlottie-player src="https://lottie.host/acb83fbb-73a9-496f-9896-4ac4a1635fd7/ZaWvYvdt5Z.lottie" background="transparent" speed="1" loop autoplay></dotlottie-player>
+                <dotlottie-player src="https://lottie.host/96da5d92-a922-448d-98ce-db5fabd4777d/K9EVLM3Hfx.lottie" background="transparent" speed="1" loop autoplay></dotlottie-player>
+            </div>
+        </div>
         
         <!-- Loyalty Rewards Section -->
         <div class="rewards-section">
             <h2>🎉 Earn Loyalty Rewards!</h2>
             <p>Play to unlock rewards like discounts and store credits.</p>
             <button onclick="window.location.href='loyalty.html'">Claim Reward</button>
-
         </div>
 
         <!-- eCommerce Shop -->
@@ -59,35 +113,7 @@
         <!-- Back to Home Button -->
         <a href="index.html" class="back-button">🏠 Back to Home</a>
     </div>
-    <div class="rewards-section">
-        <h2>🎉 Earn Loyalty Rewards!</h2>
-        <p>Play to unlock rewards like discounts and store credits.</p>
-        <button onclick="claimReward()">Claim Reward</button>
-    </div>
     
-
     <script src="game/game.js"></script>
 </body>
 </html>
-
-<footer class="footer">
-    <div class="footer-container">
-        <div class="footer-logo">
-            <h2>MokeSell</h2>
-            <p>Making ecommerce simple and easy</p>
-            <div class="social-icons">
-                <a href="https://r.search.yahoo.com/_ylt=Awr1VS6U_kpnDwIAtToj4gt.;_ylu=Y29sbwNzZzMEcG9zAzIEdnRpZAMEc2VjA3Ny/RV=2/RE=1734177684/RO=10/RU=https%3a%2f%2fwww.facebook.com%2fenjoybball%2f/RK=2/RS=tAmqfOynVixG_LncDrCMIyG0yIQ-"><i class="fab fa-facebook"></i></a>
-                <a href="https://r.search.yahoo.com/_ylt=Awr1VS7P_kpnDwIArLcj4gt.;_ylu=Y29sbwNzZzMEcG9zAzEEdnRpZAMEc2VjA3Ny/RV=2/RE=1734177744/RO=10/RU=https%3a%2f%2fwww.instagram.com%2fNBAStore%2f/RK=2/RS=annVJznk3wWT0kNBNcA03zJi4_U-"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/watch?v=Z53N1Hf2sRs"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
-        <div class="footer-contact">
-            <h3>CONTACT INFO</h3>
-            <p>📍 State Road 54 Trinity, Florida</p>
-            <p>📞 Call: (99) 124 1242 12</p>
-            <p>🕒 8:00-18:00, Sat Closed</p>
-        </div>
-    </div>
-</footer>
-<script src="script.js"></script>
-</body>
